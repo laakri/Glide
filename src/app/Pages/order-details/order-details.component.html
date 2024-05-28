@@ -1,0 +1,158 @@
+<div
+  class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 md:flex flex-col md:flex-row gap-6 min-h-[37rem]"
+>
+  <div class="w-full md:w-2/3 flex flex-col gap-4">
+    <!-- Order Information -->
+    <div class="px-6">
+      <div class="text-2xl font-bold mb-2">Order Details</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Order ID:</span>
+          </label>
+          <div class="text-lg">#1234</div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Date:</span>
+          </label>
+          <div class="text-lg">2024-05-10</div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Status:</span>
+          </label>
+          <div class="text-lg">
+            <span class="badge badge-success">Shipped</span>
+          </div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Total:</span>
+          </label>
+          <div class="text-lg">$120.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex flex-col gap-4 px-6">
+      <div class="text-2xl font-bold mb-2">Order Information</div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div>
+          <div class="font-semibold">Full Name:</div>
+          <div>fullName</div>
+        </div>
+        <div>
+          <div class="font-semibold">Email:</div>
+          <div>email</div>
+        </div>
+        <div>
+          <div class="font-semibold">Phone:</div>
+          <div>phone</div>
+        </div>
+        <div>
+          <div class="font-semibold">Shipping Address:</div>
+          <div>address</div>
+        </div>
+        <div>
+          <div class="font-semibold">City:</div>
+          <div>city</div>
+        </div>
+        <div>
+          <div class="font-semibold">Postal Code:</div>
+          <div>postalCode</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product List -->
+    <div class="rounded-lg p-6">
+      <div class="text-2xl font-bold mb-4">Products</div>
+      <div class="overflow-x-auto mt-4">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Product 1 -->
+            <tr>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-12 h-12">
+                      <img
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                        alt="Product Image"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">Nike Carboon</div>
+                    <div class="text-sm opacity-50">Shoes</div>
+                  </div>
+                </div>
+              </td>
+              <td>Zemlak, Daniel and Leannon Desktop Support Technician</td>
+              <td>$210</td>
+              <td>1</td>
+              <td>$210</td>
+            </tr>
+            <!-- Product 2 -->
+            <tr>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-12 h-12">
+                      <img
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                        alt="Product Image"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">Adidas Runner</div>
+                    <div class="text-sm opacity-50">Shoes</div>
+                  </div>
+                </div>
+              </td>
+              <td>Professional shoes for running</td>
+              <td>$150</td>
+              <td>2</td>
+              <td>$300</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Order Summary -->
+  <div class="w-full md:w-1/3">
+    <div class="border dark:border-gray-700 rounded-lg p-4">
+      <div class="text-2xl mb-4 font-bold">Order Summary</div>
+      <div class="flex justify-between mb-2">
+        <div>Subtotal</div>
+        <div class="font-bold">$510.00</div>
+      </div>
+      <div class="flex justify-between mb-2">
+        <div>Shipping</div>
+        <div class="font-bold">$10.00</div>
+      </div>
+      <div class="flex justify-between mb-2">
+        <div>Discount</div>
+        <div class="font-bold">-$50.00</div>
+      </div>
+      <div class="flex justify-between mb-2">
+        <div class="font-bold text-lg">Total</div>
+        <div class="font-bold text-lg">$470.00</div>
+      </div>
+      <button class="btn btn-primary mt-4 w-full" type="button">
+        Download Invoice
+      </button>
+    </div>
+  </div>
+</div>

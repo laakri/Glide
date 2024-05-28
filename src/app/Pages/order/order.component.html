@@ -1,1 +1,102 @@
-<p>order works!</p>
+<div
+  class="max-w-[50rem] mx-auto py-8 px-4 sm:px-6 lg:px-8 md:flex flex-col md:flex-row gap-6 min-h-[37rem]"
+>
+  <div class="w-full p-2 flex flex-col gap-4">
+    <div>
+      <div class="text-2xl">Order Details</div>
+      <div>Please fill in the form to complete your order.</div>
+    </div>
+
+    <form #orderForm="ngForm" (ngSubmit)="submitOrder(orderForm)">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="label">
+            <span class="label-text">Full Name</span>
+          </label>
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            name="fullName"
+            ngModel
+            required
+            placeholder="Enter your full name"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            class="input input-bordered w-full"
+            name="email"
+            ngModel
+            required
+            placeholder="Enter your email"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text">Phone</span>
+          </label>
+          <input
+            type="tel"
+            class="input input-bordered w-full"
+            name="phone"
+            ngModel
+            required
+            placeholder="Enter your phone number"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text">Shipping Address</span>
+          </label>
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            name="address"
+            ngModel
+            required
+            placeholder="Enter your shipping address"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text">City</span>
+          </label>
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            name="city"
+            ngModel
+            required
+            placeholder="Enter your city"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text">Postal Code</span>
+          </label>
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            name="postalCode"
+            ngModel
+            required
+            placeholder="Enter your postal code"
+          />
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="w-max h-max py-4 flex flex-col gap-4">
+          <div class="flex gap-4 items-end font-bold text-xl">
+            <div>Total :</div>
+            <div class="text-lg">$500.5</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-4 w-full" type="submit">Apply</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 min-h-[37rem]">
+  <div class="w-full p-2 flex flex-col gap-4">
+    <!-- Profile Information -->
+    <div class="shadow-lg rounded-lg p-6">
+      <div class="flex justify-between items-center mb-4">
+        <div class="text-2xl font-bold">Profile Information</div>
+        <button class="btn btn-sm btn-outline" (click)="editProfile()">
+          Edit Profile
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Full Name:</span>
+          </label>
+          <div class="text-lg">John Doe</div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Email:</span>
+          </label>
+          <div class="text-lg">john.doeexample.com</div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Phone:</span>
+          </label>
+          <div class="text-lg">+1234567890</div>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-bold">Address:</span>
+          </label>
+          <div class="text-lg">123 Main St, City, Country</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order History -->
+    <div class="shadow-lg rounded-lg p-6 mt-6">
+      <div class="text-2xl font-bold mb-4">Order History</div>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th class="p-2 text-left text-lg">Order ID</th>
+              <th class="p-2 text-left text-lg">Date</th>
+              <th class="p-2 text-left text-lg">Status</th>
+              <th class="p-2 text-left text-lg">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2">#1234</td>
+              <td class="p-2">2024-05-10</td>
+              <td class="p-2">
+                <span class="badge badge-success">Shipped</span>
+              </td>
+              <td class="p-2">$120.00</td>
+            </tr>
+            <tr>
+              <td class="p-2">#1235</td>
+              <td class="p-2">2024-05-12</td>
+              <td class="p-2">
+                <span class="badge badge-warning">Processing</span>
+              </td>
+              <td class="p-2">$85.00</td>
+            </tr>
+
+            <tr>
+              <td class="p-2">#1236</td>
+              <td class="p-2">2024-05-15</td>
+              <td class="p-2">
+                <span class="badge badge-error">Canceled</span>
+              </td>
+              <td class="p-2">$60.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

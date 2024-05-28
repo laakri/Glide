@@ -1,0 +1,174 @@
+<div class="mx-auto py-8 px-4 sm:px-6 lg:px-8 flex gap-2">
+  <div class="flex flex-col items-center">
+    <div class="menu bg-base-200 w-64 rounded-box p-4 sticky top-20">
+      <h2 class="menu-title dark:text-primary text-lg">Filters</h2>
+      <ul>
+        <li>
+          <h3 class="menu-title">Categories</h3>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Electronics
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Fashion
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Home Goods
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Sports & Outdoors
+              </label>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3 class="menu-title">Price Range</h3>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" />
+                $0 - $100
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                $100 - $200
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                $200 - $300
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                $300+
+              </label>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3 class="menu-title">Brand</h3>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Brand A
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Brand B
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Brand C
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                Brand D
+              </label>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3 class="menu-title">Ratings</h3>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" />
+                1 Star & Up
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                2 Stars & Up
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                3 Stars & Up
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" />
+                4 Stars & Up
+              </label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="w-full p-2 flex flex-col gap-3">
+    <div class="w-full">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="input input-bordered w-full"
+      />
+    </div>
+    <div class="flex flex-wrap gap-4">
+      @for (car of table; track car){
+      <div
+        class="card w-[18.5rem] bg-base-100 shadow-xl border border-base-300"
+      >
+        <figure>
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            alt="Shoes"
+          />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">Shoes!</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div
+            class="card-actions w-full flex align-center mt-4 justify-between"
+          >
+            <button class="btn btn-sm btn-ghost text-lg">233 $</button>
+            <button class="btn btn-sm btn-primary w-2/5">Buy Now</button>
+            <button class="btn btn-sm btn-secondary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

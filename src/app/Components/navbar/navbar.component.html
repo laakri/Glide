@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <div class="flex gap-2 items-center">
-          <img class="h-6 w-auto" src="../../../assets/Blue-X-line.png" />
+          <img class="h-6 w-auto" src="../../../assets/X-line.png" />
           <span class="text-2xl">Glide</span>
         </div>
         <div class="hidden md:block">
@@ -32,7 +32,8 @@
               href="/order"
               class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >Services</a
-            ><a
+            >
+            <a
               href="/orderDetails"
               class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >orderDetails</a
@@ -83,30 +84,15 @@
             </a>
           </div>
           <a
-            href="#"
+            href="/login"
             class="light: hover:bg-gray-700 light: px-3 py-2 rounded-md text-sm font-medium"
             >Login</a
           >
           <a
-            href="#"
+            href="/signup"
             class="bg-blue-400 hover:bg-blue-600 text-black px-3 py-2 rounded-md text-sm font-medium ml-2"
             >Sign up</a
           >
-        </div>
-        <div class="pt-4 pb-3">
-          <div class="flex items-center px-5">
-            <div class="flex-shrink-0">
-              <img class="h-6 w-auto" src="../../assets/squi-arrow.png" />
-            </div>
-            <div class="ml-3">
-              <div class="text-base font-medium leading-none light:text-white">
-                User
-              </div>
-              <div class="text-sm font-medium leading-none text-gray-400">
-                usersxample.com
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="-mr-2 flex md:hidden">
@@ -115,6 +101,7 @@
           class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
           aria-controls="mobile-menu"
           aria-expanded="false"
+          (click)="toggleMobileMenu()"
         >
           <span class="sr-only">Open main menu</span>
           <svg
@@ -136,7 +123,7 @@
       </div>
     </div>
   </div>
-  <!-- Mobile menu, toggle classes based on menu state -->
+  @if(isMobileMenuOpen){
   <div class="md:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       <a
@@ -214,4 +201,5 @@
       </div>
     </div>
   </div>
+  }
 </nav>

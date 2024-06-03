@@ -1,4 +1,4 @@
-<div class="container mx-auto p-6">
+<div class="container mx-auto p-6 min-h-[38rem]">
   <h1 class="text-2xl font-bold mb-4">Product List</h1>
   <table class="table w-full">
     <thead>
@@ -10,24 +10,63 @@
         <th>Actions</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor="let product of products">
+      @for (product of products; track product) {
+      <tr>
         <td>{{ product.name }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.price }}</td>
-        <td>{{ product.stockQuantity }}</td>
+        <td>{{ product.stock }}</td>
         <td>
-          <button class="btn btn-sm btn-primary" (click)="editProduct(product)">
+          <button
+            class="btn btn-sm btn-primary mr-2"
+            (click)="editProduct(product)"
+          >
             Edit
           </button>
           <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteProduct(product)"
+            class="btn btn-sm btn-error"
+            (click)="deleteProduct(product.id)"
+            onclick="deleteConfirmationModal.showModal()"
           >
             Delete
           </button>
         </td>
       </tr>
+      }
     </tbody>
   </table>
+  @if (!products || products.length === 0) {
+
+  <p class="text-center text-gray-500 mt-10">No products available.</p>
+  }
+  <dialog class="modal sm:modal-middle" id="deleteConfirmationModal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+      </form>
+      <h3 class="font-bold text-lg">Confirm Delete</h3>
+      <p class="py-4">Are you sure you want to delete this product?</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button
+            type="button"
+            class="btn btn-error btn-sm"
+            (click)="confirmDelete()"
+            data-dismiss="modal"
+          >
+            Delete
+          </button>
+
+          <button class="btn btn-sm">Close</button>
+        </form>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
 </div>

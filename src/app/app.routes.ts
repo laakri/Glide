@@ -27,8 +27,7 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AddProductComponent },
+      { path: '', redirectTo: 'add-product', pathMatch: 'full' },
       { path: 'add-product', component: AddProductComponent },
       { path: 'list-product', component: ListProductComponent },
     ],

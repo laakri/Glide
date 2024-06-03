@@ -1,47 +1,140 @@
 <div class="flex">
   <div class="bg-base-200 w-20 rounded-box p-4 ml-2 fixed top-20">
-    <ul class="space-y-2">
-      <li>
-        <!-- <a routerLink="/dashboard" class="btn btn-ghost btn-sm w-full">
-          <img class="h-6 w-auto" src="../../../assets/X-line.png" />
-        </a> -->
-
-        <a routerLink="/" class="btn btn-ghost btn-sm w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-            ></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/add-product" class="btn btn-ghost btn-sm w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
-          </svg>
-        </a>
-      </li>
-    </ul>
+    <div>
+      <ul class="space-y-6">
+        <!--<li>
+          <a routerLink="/dashboard" class="btn btn-ghost btn-sm w-full">
+            <img class="h-6 w-auto" src="../../../assets/X-line.png" />
+          </a> 
+        </li>-->
+        <li>
+          <a href="/" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              ></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="/dashboard/add-product" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              ></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="dashboard/list-product" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V8a1 1 0 00-1-1H5a1 1 0 00-1 1v5m16 0h-1a4 4 0 01-8 0H4m16 0V5m-7 10a4 4 0 100-8 4 4 0 000 8z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/orders" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h18M9 8h6m2 8H7a2 2 0 010-4h10a2 2 0 010 4z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/customers" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 14l-4-4m0 0l-4 4m4-4v12m0-12a8 8 0 110-16 8 8 0 010 16z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/reports" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 16v2a1 1 0 001 1h16a1 1 0 001-1v-2M4 8h16M4 12h16M4 4h16"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/settings" class="btn btn-ghost btn-sm w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l2 2m-6 4h6a2 2 0 002-2V8a2 2 0 00-2-2H9a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="flex-1 p-4 ml-14">
     <router-outlet></router-outlet>

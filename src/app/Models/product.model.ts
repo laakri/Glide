@@ -6,5 +6,5 @@ export interface Product {
   category: string;
   imageUrl: string;
   shortDescription: string;
-  stockQuantity: number;
+  stock: number;
 }

@@ -6,117 +6,52 @@
         <li>
           <h3 class="menu-title">Categories</h3>
           <ul>
+            @for (category of categories; track category) {
             <li>
               <label>
-                <input type="checkbox" />
-                Electronics
+                <input
+                  type="checkbox"
+                  (change)="onCategoryChange(category)"
+                  [checked]="selectedCategories.includes(category)"
+                />
+                {{ category }}
               </label>
             </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Fashion
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Home Goods
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Sports & Outdoors
-              </label>
-            </li>
+            }
           </ul>
         </li>
         <li>
           <h3 class="menu-title">Price Range</h3>
           <ul>
+            @for (priceRange of priceRanges; track priceRange) {
             <li>
               <label>
-                <input type="checkbox" />
-                $0 - $100
+                <input
+                  type="checkbox"
+                  (change)="onPriceRangeChange(priceRange)"
+                  [checked]="selectedPriceRanges.includes(priceRange)"
+                />
+                {{ priceRange }}
               </label>
             </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                $100 - $200
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                $200 - $300
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                $300+
-              </label>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <h3 class="menu-title">Brand</h3>
-          <ul>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Brand A
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Brand B
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Brand C
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                Brand D
-              </label>
-            </li>
+            }
           </ul>
         </li>
         <li>
           <h3 class="menu-title">Ratings</h3>
           <ul>
+            @for (rating of ratings; track rating) {
             <li>
               <label>
-                <input type="checkbox" />
-                1 Star & Up
+                <input
+                  type="checkbox"
+                  (change)="onRatingChange(rating)"
+                  [checked]="selectedRatings.includes(rating)"
+                />
+                {{ rating }}
               </label>
             </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                2 Stars & Up
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                3 Stars & Up
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                4 Stars & Up
-              </label>
-            </li>
+            }
           </ul>
         </li>
       </ul>
@@ -128,26 +63,30 @@
         type="text"
         placeholder="Search..."
         class="input input-bordered w-full"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchTermChange()"
       />
     </div>
     <div class="flex flex-wrap gap-4">
-      @for (car of table; track car){
+      @for (product of filteredProducts; track product) {
       <div
         class="card w-[18.5rem] bg-base-100 shadow-xl border border-base-300"
       >
         <figure>
           <img
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
+            alt="Product Image"
           />
         </figure>
         <div class="card-body">
-          <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 class="card-title">{{ product.name }}</h2>
+          <p>{{ product.description }}</p>
           <div
             class="card-actions w-full flex align-center mt-4 justify-between"
           >
-            <button class="btn btn-sm btn-ghost text-lg">233 $</button>
+            <button class="btn btn-sm btn-ghost text-lg">
+              {{ product.price }} Dt
+            </button>
             <button class="btn btn-sm btn-primary w-2/5">Buy Now</button>
             <button class="btn btn-sm btn-secondary">
               <svg

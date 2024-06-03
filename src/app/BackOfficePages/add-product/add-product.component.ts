@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../../Services/product.service';
+import { ToastService } from '../../Services/toast.service';
 
 @Component({
   selector: 'app-add-product',
@@ -10,7 +11,10 @@ import { ProductService } from '../../Services/product.service';
   styleUrl: './add-product.component.css',
 })
 export class AddProductComponent {
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private toastService: ToastService
+  ) {}
 
   submitAddProduct(addProductForm: NgForm) {
     const addProductDetails: Record<string, any> = {};
@@ -20,12 +24,12 @@ export class AddProductComponent {
     this.productService.addProduct(addProductDetails).subscribe(
       (response) => {
         // Handle success response
-        console.log('Product added successfully:', response);
-        // productData.reset();
+        this.toastService.showToast('Product added successfully .', 'success');
+        addProductForm.reset();
       },
       (error) => {
         // Handle error
-        console.error('Error adding product:', error);
+        this.toastService.showToast('Error adding product .', 'error');
       }
     );
   }

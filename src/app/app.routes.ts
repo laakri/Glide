@@ -11,6 +11,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { DashboardComponent } from './BackOfficePages/dashboard/dashboard.component';
 import { AddProductComponent } from './BackOfficePages/add-product/add-product.component';
+import { ListProductComponent } from './BackOfficePages/list-product/list-product.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AddProductComponent },
       { path: 'add-product', component: AddProductComponent },
+      { path: 'list-product', component: ListProductComponent },
     ],
   },
 ];

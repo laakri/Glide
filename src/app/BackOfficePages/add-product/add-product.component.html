@@ -29,6 +29,18 @@
       ></textarea>
     </div>
     <div class="space-y-1">
+      <label for="shortDescription" class="block font-semibold"
+        >Short Description:</label
+      >
+      <textarea
+        id="shortDescription"
+        class="textarea textarea-bordered w-full"
+        ngModel
+        name="shortDescription"
+        required
+      ></textarea>
+    </div>
+    <div class="space-y-1">
       <label for="price" class="block font-semibold">Price:</label>
       <input
         type="number"
@@ -36,6 +48,17 @@
         class="input input-bordered w-full"
         ngModel
         name="price"
+        required
+      />
+    </div>
+    <div class="space-y-1">
+      <label for="stock" class="block font-semibold">Stock:</label>
+      <input
+        type="number"
+        id="stock"
+        class="input input-bordered w-full"
+        ngModel
+        name="stock"
         required
       />
     </div>

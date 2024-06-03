@@ -1,3 +1,4 @@
+// routes.ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Pages/home/home.component';
 import { MarketplaceComponent } from './Pages/marketplace/marketplace.component';
@@ -8,6 +9,8 @@ import { ProfilePageComponent } from './Pages/profile-page/profile-page.componen
 import { OrderDetailsComponent } from './Pages/order-details/order-details.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
+import { DashboardComponent } from './BackOfficePages/dashboard/dashboard.component';
+import { AddProductComponent } from './BackOfficePages/add-product/add-product.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,4 +22,13 @@ export const routes: Routes = [
   { path: 'orderDetails', component: OrderDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AddProductComponent },
+      { path: 'add-product', component: AddProductComponent },
+    ],
+  },
 ];

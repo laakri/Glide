@@ -1,1 +1,52 @@
-<p>dashboard works!</p>
+<div class="flex">
+  <div class="bg-base-200 w-20 rounded-box p-4 ml-2 fixed top-20">
+    <ul class="space-y-2">
+      <li>
+        <!-- <a routerLink="/dashboard" class="btn btn-ghost btn-sm w-full">
+          <img class="h-6 w-auto" src="../../../assets/X-line.png" />
+        </a> -->
+
+        <a routerLink="/dashboard" class="btn btn-ghost btn-sm w-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+            ></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard/add-category"
+          class="btn btn-ghost btn-sm w-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            ></path>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="flex-1 p-4 ml-14">
+    <router-outlet></router-outlet>
+  </div>
+</div>

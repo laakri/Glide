@@ -1,30 +1,46 @@
+// cart.component.ts
 import { Component } from '@angular/core';
+import { CartService } from '../../Services/cart.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css',
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
-  products: { id: number; quantity: number }[] = [
-    { id: 1, quantity: 1 },
-    { id: 2, quantity: 1 },
-  ];
+  constructor(public cartService: CartService) {}
 
   increaseQuantity(productId: number) {
-    const product = this.products.find((p) => p.id === productId);
-    if (product) {
-      product.quantity++;
-    }
+    this.cartService.updateQuantity(productId, this.getQuantity(productId) + 1);
   }
 
   decreaseQuantity(productId: number) {
-    const product = this.products.find((p) => p.id === productId);
-    if (product && product.quantity > 1) {
-      product.quantity--;
-    }
+    this.cartService.updateQuantity(productId, this.getQuantity(productId) - 1);
+  }
+
+  getQuantity(productId: number): number {
+    const item = this.cartService.cartItems.find(
+      (item) => item.product.id === productId
+    );
+    return item ? item.quantity : 0;
+  }
+
+  removeItem(productId: number) {
+    this.cartService.removeFromCart(productId);
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
+  }
+
+  getCartTotal(): number {
+    return this.cartService.cartItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   }
 }

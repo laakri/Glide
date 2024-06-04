@@ -81,14 +81,14 @@
         <div class="card-body">
           <h2 class="card-title">{{ product.name }}</h2>
           <p>{{ product.description }}</p>
-          <div
-            class="card-actions w-full flex align-center mt-4 justify-between"
-          >
-            <button class="btn btn-sm btn-ghost text-lg">
-              {{ product.price }} Dt
-            </button>
-            <button class="btn btn-sm btn-primary w-2/5">Buy Now</button>
-            <button class="btn btn-sm btn-secondary">
+          <p class="text-2xl">{{ product.price }}Dt</p>
+
+          <div class="card-actions w-full flex align-center mt-4">
+            <button class="btn btn-sm btn-primary">Buy Now</button>
+            <button
+              class="btn btn-sm btn-secondary"
+              (click)="addToCart(product)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"

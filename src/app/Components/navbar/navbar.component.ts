@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../Services/cart.service';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [RouterLinkActive],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isMobileMenuOpen: boolean = false;
+  cartItemCount: number = 0;
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.cartItemCount$.subscribe((count) => {
+      this.cartItemCount = count;
+    });
+  }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

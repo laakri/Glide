@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../Models/product.model';
+import { ToastService } from './toast.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,20 +9,44 @@ import { Product } from '../Models/product.model';
 export class CartService {
   private cartKey = 'cartItems';
   cartItems: { product: Product; quantity: number }[] = [];
+  private cartItemCount = new BehaviorSubject<number>(0);
+  cartItemCount$ = this.cartItemCount.asObservable();
 
-  constructor() {
-    this.loadCart();
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const testKey = '__test__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  constructor(private toastService: ToastService) {
+    if (this.isLocalStorageAvailable()) {
+      this.loadCart();
+    }
   }
 
   private loadCart() {
     const storedCart = localStorage.getItem(this.cartKey);
     if (storedCart) {
       this.cartItems = JSON.parse(storedCart);
+      this.updateCartItemCount();
     }
   }
 
   private saveCart() {
-    localStorage.setItem(this.cartKey, JSON.stringify(this.cartItems));
+    if (this.isLocalStorageAvailable()) {
+      localStorage.setItem(this.cartKey, JSON.stringify(this.cartItems));
+    }
+    this.updateCartItemCount();
+  }
+
+  private updateCartItemCount() {
+    const uniqueItemCount = this.cartItems.length;
+    this.cartItemCount.next(uniqueItemCount);
   }
 
   addToCart(product: Product) {
@@ -28,11 +54,14 @@ export class CartService {
       (item) => item.product.id === product.id
     );
     if (existingItem) {
-      existingItem.quantity++;
+      this.toastService.showToast(
+        `Item ${product.name} is already in the cart!`,
+        'info'
+      );
     } else {
       this.cartItems.push({ product, quantity: 1 });
+      this.saveCart();
     }
-    this.saveCart();
   }
 
   removeFromCart(productId: number) {

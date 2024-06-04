@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from '../../Models/product.model';
 import { ProductService } from '../../Services/product.service';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../Services/cart.service';
 
 @Component({
   selector: 'app-marketplace',
@@ -31,7 +32,10 @@ export class MarketplaceComponent {
   selectedRatings: string[] = [];
   searchTerm: string = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -103,5 +107,8 @@ export class MarketplaceComponent {
 
   onSearchTermChange(): void {
     this.applyFiltersAndSearch();
+  }
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

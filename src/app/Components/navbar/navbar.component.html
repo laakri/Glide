@@ -11,6 +11,7 @@
             <a
               href="#"
               class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              routerLinkActive
               >Home</a
             >
             <a
@@ -70,7 +71,9 @@
             </svg>
           </label>
           <div class="indicator mt-1">
-            <span class="indicator-item badge badge-xs badge-secondary">1</span>
+            <span class="indicator-item badge badge-xs badge-secondary">{{
+              cartItemCount
+            }}</span>
             <a class="btn btn-xs" href="/cart">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

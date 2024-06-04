@@ -8,36 +8,43 @@
       </p>
     </div>
     <div class="card w-full max-w-md lg:w-1/2">
-      <form class="card-body">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            class="input input-bordered"
-            required
-          />
-        </div>
-        <div class="form-control mt-4">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            class="input input-bordered"
-            required
-          />
-          <label class="label">
-            <a href="#" class="label-text-alt link link-hover text-primary"
-              >Forgot password?</a
-            >
-          </label>
-        </div>
+      <div class="card-body">
+        <form>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="input input-bordered"
+              required
+            />
+          </div>
+          <div class="form-control mt-4">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              class="input input-bordered"
+              required
+            />
+            <label class="label">
+              <a href="#" class="label-text-alt link link-hover text-primary"
+                >Forgot password?</a
+              >
+            </label>
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn btn-primary w-full">Login</button>
+          </div>
+        </form>
         <div class="form-control mt-6">
-          <button class="btn btn-primary w-full">Login</button>
+          <button class="btn btn-accent w-full" (click)="handleAuthClick()">
+            Google
+          </button>
         </div>
         <div class="form-control mt-4 text-center">
           <span class="label-text">Don't have an account?</span>
@@ -45,7 +52,7 @@
             >Sign up here</a
           >
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

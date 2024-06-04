@@ -1,8 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 declare const gapi: any;
 
 @Component({
@@ -16,54 +14,42 @@ export class LoginComponent implements OnInit {
   private clientId =
     '650287733782-pcmh272bgib136vil0duc65q30rsoukf.apps.googleusercontent.com';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadGoogleAuthLibrary();
-    }
+    this.loadGoogleAuthLibrary();
   }
 
   loadGoogleAuthLibrary() {
-    if (typeof document !== 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://apis.google.com/js/api.js';
-      script.onload = () => {
-        gapi.load('auth2', () => {
-          gapi.auth2.init({
-            client_id: this.clientId,
-          });
+    const script = document.createElement('script');
+    script.src = 'https://apis.google.com/js/api.js';
+    script.onload = () => {
+      gapi.load('auth2', () => {
+        gapi.auth2.init({
+          client_id: this.clientId,
         });
-      };
-      document.body.appendChild(script);
-    }
+      });
+    };
+    document.body.appendChild(script);
   }
 
   async handleAuthClick() {
-    if (typeof gapi !== 'undefined' && gapi.auth2) {
-      const auth2 = gapi.auth2.getAuthInstance();
-      const googleUser = await auth2.signIn();
-      const id_token = googleUser.getAuthResponse().id_token;
+    const auth2 = gapi.auth2.getAuthInstance();
+    const googleUser = await auth2.signIn();
+    const id_token = googleUser.getAuthResponse().id_token;
 
-      this.http
-        .post<any>('http://localhost:5152/api/Users/GoogleLogin', {
-          idToken: id_token,
-        })
-        .subscribe(
-          (response) => {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']);
-          },
-          (error) => {
-            console.error('Error logging in with Google', error);
-          }
-        );
-    } else {
-      console.error('Google API not initialized');
-    }
+    this.http
+      .post<any>('http://localhost:5152/api/Users/GoogleLogin', {
+        idToken: id_token,
+      })
+      .subscribe(
+        (response) => {
+          localStorage.setItem('token', response.token);
+          // Redirect or navigate to the dashboard upon successful login
+        },
+        (error) => {
+          console.error('Error logging in with Google', error);
+        }
+      );
   }
 }

@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +12,7 @@ import { TokenService } from './token.service';
 export class AuthService {
   private apiUrl = 'http://localhost:5152/api/Users/';
   private loggedIn = new BehaviorSubject<boolean>(this.tokenService.hasToken());
+  private userData: any;
 
   loggedIn$ = this.loggedIn.asObservable();
 
@@ -41,6 +39,7 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
@@ -49,6 +48,16 @@ export class AuthService {
     this.tokenService.removeToken();
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
+  }
+
+  getUserData(): any {
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.userData = jwtDecode(token);
+      return this.userData;
+    } else {
+      return null;
+    }
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

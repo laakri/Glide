@@ -5,33 +5,27 @@
       <div class="flex justify-between items-center mb-4">
         <div class="text-2xl font-bold">Profile Information</div>
         <button class="btn btn-sm btn-outline" (click)="editProfile()">
-          Edit Profile
+          Settings
         </button>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <label class="label">
             <span class="label-text font-bold">Full Name:</span>
           </label>
-          <div class="text-lg">John Doe</div>
+          <div class="text-lg">{{ user.userName }}</div>
         </div>
         <div>
           <label class="label">
             <span class="label-text font-bold">Email:</span>
           </label>
-          <div class="text-lg">john.doeexample.com</div>
+          <div class="text-lg">{{ user.userEmail }}</div>
         </div>
         <div>
           <label class="label">
-            <span class="label-text font-bold">Phone:</span>
+            <span class="label-text font-bold">Role:</span>
           </label>
-          <div class="text-lg">+1234567890</div>
-        </div>
-        <div>
-          <label class="label">
-            <span class="label-text font-bold">Address:</span>
-          </label>
-          <div class="text-lg">123 Main St, City, Country</div>
+          <div class="text-lg">{{ user.role }}</div>
         </div>
       </div>
     </div>
@@ -47,34 +41,37 @@
               <th class="p-2 text-left text-lg">Date</th>
               <th class="p-2 text-left text-lg">Status</th>
               <th class="p-2 text-left text-lg">Total</th>
+              <th class="p-2 text-left text-lg">Actions</th>
             </tr>
           </thead>
           <tbody>
+            @for(order of orders;track order){
             <tr>
-              <td class="p-2">#1234</td>
-              <td class="p-2">2024-05-10</td>
+              <td class="p-2">#{{ order.id }}</td>
               <td class="p-2">
-                <span class="badge badge-success">Shipped</span>
+                {{ order.date | date : "dd/MM/yyyy HH:mm:ss" }}
               </td>
-              <td class="p-2">$120.00</td>
-            </tr>
-            <tr>
-              <td class="p-2">#1235</td>
-              <td class="p-2">2024-05-12</td>
               <td class="p-2">
-                <span class="badge badge-warning">Processing</span>
+                <div
+                  class="badge"
+                  [ngClass]="{
+                    'badge-success': order.status === 'Shipped',
+                    'badge-warning': order.status === 'Pending',
+                    'badge-error': order.status === 'Canceled'
+                  }"
+                >
+                  {{ order.status }}
+                </div>
               </td>
-              <td class="p-2">$85.00</td>
-            </tr>
-
-            <tr>
-              <td class="p-2">#1236</td>
-              <td class="p-2">2024-05-15</td>
+              <td class="p-2">${{ order.total }}</td>
               <td class="p-2">
-                <span class="badge badge-error">Canceled</span>
+                <button class="btn btn-sm mr-2" (click)="viewOrder(order.id)">
+                  View
+                </button>
+                <button class="btn btn-xs text-red-400">Report!</button>
               </td>
-              <td class="p-2">$60.00</td>
             </tr>
+            }
           </tbody>
         </table>
       </div>

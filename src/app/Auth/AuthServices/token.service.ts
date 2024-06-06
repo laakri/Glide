@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TokenService {
-  private tokenKey = 'auth_token';
   private readonly TOKEN_KEY = 'auth-token';
 
   private isLocalStorageAvailable(): boolean {
@@ -25,20 +24,27 @@ export class TokenService {
       console.error('LocalStorage is not available');
     }
   }
-  getToken(): any {
+
+  getToken(): string | null {
     if (this.isLocalStorageAvailable()) {
-      return localStorage.getItem(this.tokenKey);
+      return localStorage.getItem(this.TOKEN_KEY);
+    } else {
+      console.error('LocalStorage is not available');
+      return null;
+    }
+  }
+
+  removeToken(): void {
+    if (this.isLocalStorageAvailable()) {
+      localStorage.removeItem(this.TOKEN_KEY);
     } else {
       console.error('LocalStorage is not available');
     }
   }
 
-  removeToken(): void {
-    localStorage.removeItem(this.tokenKey);
-  }
-
   hasToken(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
   }
 
   isTokenExpired(token: string): boolean {

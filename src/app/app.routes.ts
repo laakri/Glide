@@ -13,6 +13,7 @@ import { DashboardComponent } from './BackOfficePages/dashboard/dashboard.compon
 import { AddProductComponent } from './BackOfficePages/add-product/add-product.component';
 import { ListProductComponent } from './BackOfficePages/list-product/list-product.component';
 import { authGuard } from './Auth/AuthServices/auth.guard';
+import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,7 @@ export const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'product', component: ProductPageComponent },
   { path: 'profile', component: ProfilePageComponent },
-  { path: 'orderDetails', component: OrderDetailsComponent },
+  { path: 'orderDetails/:orderId', component: OrderDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   {
@@ -29,11 +30,16 @@ export const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'add-product', pathMatch: 'full' },
+
       {
         path: 'add-product',
-        component: AddProductComponent,
+        loadComponent: () =>
+          import('./BackOfficePages/add-product/add-product.component').then(
+            (mod) => mod.AddProductComponent
+          ),
         canActivate: [authGuard],
       },
+
       {
         path: 'list-product',
         component: ListProductComponent,
@@ -41,4 +47,6 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: 'error-page', component: ErrorPageComponent },
+  { path: '**', redirectTo: '/error-page' },
 ];

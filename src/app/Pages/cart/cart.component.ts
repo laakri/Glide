@@ -1,4 +1,3 @@
-// cart.component.ts
 import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { FormsModule } from '@angular/forms';

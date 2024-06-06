@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   isMobileMenuOpen: boolean = false;
   cartItemCount: number = 0;
   isLoggedIn: boolean = false;
+  userData: any;
 
   constructor(
     private cartService: CartService,
@@ -26,11 +27,16 @@ export class NavbarComponent implements OnInit {
     });
     this.authService.isLoggedIn().subscribe((loggedIn: boolean) => {
       this.isLoggedIn = loggedIn;
+      if (loggedIn) {
+        this.userData = this.authService.getUserData();
+      }
     });
   }
+
   logout(): void {
     this.authService.logoutUser();
   }
+
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }

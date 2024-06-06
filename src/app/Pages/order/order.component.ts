@@ -3,6 +3,10 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Product } from '../../Models/product.model';
+import { OrderService } from '../../Services/order.service';
+import { ToastService } from '../../Services/toast.service';
+import { CartService } from '../../Services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -16,7 +20,13 @@ export class OrderComponent implements OnInit {
   cartTotal: number = 0;
   isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    private orderService: OrderService,
+    private toastService: ToastService,
+    private cartService: CartService,
+    private router: Router
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
@@ -25,12 +35,14 @@ export class OrderComponent implements OnInit {
       this.loadCartItems();
     }
   }
-
   private loadCartItems() {
     const storedCart = localStorage.getItem('cartItems');
     if (storedCart) {
       this.cartItems = JSON.parse(storedCart);
       this.calculateTotal();
+    }
+    if (this.cartItems.length === 0) {
+      this.router.navigate(['/marketplace']);
     }
   }
 
@@ -47,6 +59,16 @@ export class OrderComponent implements OnInit {
       orderDetails[key] = value;
     }
 
-    console.log('Order Details:', orderDetails);
+    this.orderService.submitOrder(orderDetails).subscribe(
+      (response) => {
+        this.toastService.showToast('Order created successfully .', 'success');
+        this.cartService.clearCart();
+        this.router.navigate(['/marketplace']);
+      },
+      (error) => {
+        console.error(error);
+        this.toastService.showToast('Error creating Order .', 'error');
+      }
+    );
   }
 }

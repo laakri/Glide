@@ -64,10 +64,9 @@ export class LoginComponent {
     for (const [key, value] of Object.entries(loginForm.value)) {
       userData[key] = value;
     }
-    console.log(userData);
     this.authService.loginUser(userData).subscribe(
       (response) => {
-        console.log(response), this.router.navigate(['/']);
+        this.router.navigate(['/marketplace']);
       },
       (error) => console.error(error)
     );

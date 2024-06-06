@@ -3,11 +3,13 @@ import { Product } from '../../Models/product.model';
 import { ProductService } from '../../Services/product.service';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../Services/cart.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-marketplace',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './marketplace.component.html',
   styleUrl: './marketplace.component.css',
 })
@@ -42,8 +44,12 @@ export class MarketplaceComponent {
   }
 
   loadProducts(): void {
-    this.productService.getProducts().subscribe((products: Product[]) => {
-      this.products = products;
+    this.productService.getProducts().subscribe((response: any) => {
+      if (response && response.$values) {
+        this.products = response.$values;
+      } else {
+        this.products = response;
+      }
       this.applyFiltersAndSearch();
     });
   }

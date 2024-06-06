@@ -27,6 +27,16 @@ export class ProductService {
       })
     );
   }
+
+  getProductById(productId: number): Observable<Product> {
+    const productUrl = `${this.apiUrl}/${productId}`;
+    return this.http.get<Product>(productUrl).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
   deleteProduct(productId: number): Observable<any> {
     const deleteUrl = `${this.apiUrl}/${productId}`;
     return this.http.delete<any>(deleteUrl).pipe(
@@ -35,6 +45,7 @@ export class ProductService {
       })
     );
   }
+
   searchProducts(
     nameOrDescription?: string,
     categories?: string[],

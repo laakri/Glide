@@ -78,20 +78,33 @@
             alt="Product Image"
           />
         </figure>
-        <div class="card-body">
-          <h2 class="card-title">{{ product.name }}</h2>
+        <div class="card-body p-4">
+          <a
+            [routerLink]="['/product', product.id]"
+            class="text-blue-500 hover:underline"
+          >
+            <h2 class="card-title">
+              {{ product.name }}
+            </h2>
+          </a>
+
           <p>{{ product.description }}</p>
           <p class="text-2xl">{{ product.price }}Dt</p>
-
-          <div class="card-actions w-full flex align-center mt-4">
-            <button class="btn btn-sm btn-primary">Buy Now</button>
+          <div
+            class="card-actions w-full flex justify-center items-center mt-4"
+          >
             <button
-              class="btn btn-sm btn-secondary"
+              class="btn btn-sm text-primary border-1 border-primary flex-grow"
+            >
+              Buy Now
+            </button>
+            <button
+              class="btn btn-sm text-secondary border-1 border-secondary flex-none"
               (click)="addToCart(product)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
+                class="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

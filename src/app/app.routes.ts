@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'marketplace', component: MarketplaceComponent },
   { path: 'cart', component: CartComponent },
   { path: 'order', component: OrderComponent },
-  { path: 'product', component: ProductPageComponent },
+  { path: 'product/:productId', component: ProductPageComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: 'orderDetails/:orderId', component: OrderDetailsComponent },
   { path: 'login', component: LoginComponent },

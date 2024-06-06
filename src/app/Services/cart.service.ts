@@ -59,6 +59,10 @@ export class CartService {
         'info'
       );
     } else {
+      this.toastService.showToast(
+        `Item Added to cart successfully!`,
+        'success'
+      );
       this.cartItems.push({ product, quantity: 1 });
       this.saveCart();
     }

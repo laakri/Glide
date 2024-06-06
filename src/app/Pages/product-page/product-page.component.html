@@ -12,19 +12,34 @@
       </div>
       <div class="md:flex-1 px-4">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          Product Name
+          {{ product.name }}
         </h2>
         <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante
-          justo. Integer euismod libero id mauris malesuada tincidunt.
+          {{ product.shortDescription }}
         </p>
+        <div class="mb-4" [ngClass]="getStockClass()">
+          <span class="font-bold text-gray-700 dark:text-gray-300"
+            >Availability :</span
+          >
+
+          @if(product.stock === undefined || product.stock === null){
+          <span> Availability Unknown </span>
+          }@else if(product.stock === 0){
+          <span> Out of Stock </span>
+          }@else if(product.stock > 0 && product.stock <= 10){
+          <span> Low Stock ({{ product.stock }} left) </span>
+          }@else if(product.stock > 10){
+          <span> In Stock ({{ product.stock }} left) </span> }
+        </div>
         <div class="mb-4">
           <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Availability :
+            >Category :
           </span>
-          <span class="text-gray-600 dark:text-gray-300">In Stock</span>
+          <span class="text-gray-600 dark:text-gray-300">
+            {{ product.category }}
+          </span>
         </div>
-
+        <!-- 
         <div class="mb-4">
           <span class="font-bold text-gray-700 dark:text-gray-300"
             >Select Size:</span
@@ -46,28 +61,27 @@
               L
             </button>
           </div>
-        </div>
+        </div> -->
         <div>
           <span class="font-bold text-gray-700 dark:text-gray-300"
             >Product Description:</span
           >
           <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-            ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue
-            vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae
-            nisi ultrices placerat non eget velit.
+            {{ product.description }}
           </p>
         </div>
         <div class="my-2 text-lg">
           <span class="font-bold text-gray-700 dark:text-gray-300"
             >Price :
           </span>
-          <span class="text-primary text-2xl"> $29.99</span>
+          <span class="text-primary text-2xl"> ${{ product.price }}</span>
         </div>
         <div class="flex -mx-2 mt-6 justify-center">
           <div class="w-3/6 px-2">
-            <button class="btn btn-outline rounded-xl w-full">
+            <button
+              class="btn btn-outline rounded-xl w-full"
+              (click)="addToCart(product)"
+            >
               Add to Cart
             </button>
           </div>

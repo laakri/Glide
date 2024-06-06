@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../AuthServices/auth.service';
 import { ToastService } from '../../Services/toast.service';
 import { FormsModule, NgForm } from '@angular/forms';
 

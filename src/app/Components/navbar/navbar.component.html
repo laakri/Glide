@@ -47,6 +47,7 @@
           </div>
         </div>
       </div>
+
       <div class="flex items-center">
         <div class="hidden md:flex md:gap-2 md:ml-4">
           <label class="swap swap-rotate">
@@ -74,6 +75,7 @@
             <span class="indicator-item badge badge-xs badge-secondary">{{
               cartItemCount
             }}</span>
+
             <a class="btn btn-xs" href="/cart">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,6 +93,45 @@
               </svg>
             </a>
           </div>
+          @if(isLoggedIn){
+          <div class="flex items-center gap-2">
+            <div class="flex items-center px-5">
+              <div class="flex-shrink-0">
+                <img class="h-5 w-auto" src="../../assets/squi-arrow.png" />
+              </div>
+              <div class="ml-3">
+                <div class="text-base font-medium leading-none">User</div>
+                <div class="text-sm font-medium leading-none text-gray-400">
+                  usersxample.com
+                </div>
+              </div>
+            </div>
+            <details class="dropdown dropdown-end">
+              <summary class="btn btn-sm">
+                <svg
+                  class="swap-off fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
+                  />
+                </svg>
+              </summary>
+              <ul
+                class="p-2 shadow menu dropdown-content z-[1] bg-base-100 border border-base-200 rounded-box w-52 gap-2"
+              >
+                <li><a class="btn btn-sm btn-ghost">Profile</a></li>
+                <li><a class="btn btn-sm btn-ghost">Setting</a></li>
+                <li>
+                  <a class="btn btn-sm btn-error" (click)="logout()">Loggout</a>
+                </li>
+              </ul>
+            </details>
+          </div>
+          } @else{
           <a
             href="/login"
             class="light: hover:bg-gray-700 light: px-3 py-2 rounded-md text-sm font-medium"
@@ -101,6 +142,7 @@
             class="bg-blue-400 hover:bg-blue-600 text-black px-3 py-2 rounded-md text-sm font-medium ml-2"
             >Sign up</a
           >
+          }
         </div>
       </div>
       <div class="-mr-2 flex md:hidden">

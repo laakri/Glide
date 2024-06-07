@@ -19,6 +19,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th>Product Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -40,15 +41,17 @@
                     />
                   </div>
                 </div>
-                <div>
-                  <div class="font-bold">{{ item.product.name }}</div>
-                  <div class="text-sm opacity-50">
-                    {{ item.product.category }}
-                  </div>
+              </div>
+            </td>
+            <td>
+              <div>
+                <div class="font-bold">{{ item.product.name }}</div>
+                <div class="text-sm opacity-50">
+                  {{ item.product.category }}
                 </div>
               </div>
             </td>
-            <td>{{ item.product.description }}</td>
+            <td class="line-clamp-2">{{ item.product.description }}</td>
             <td>{{ item.product.price }} Dt</td>
             <td>
               <div class="flex items-center gap-1">

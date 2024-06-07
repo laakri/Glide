@@ -14,6 +14,7 @@ import { AddProductComponent } from './BackOfficePages/add-product/add-product.c
 import { ListProductComponent } from './BackOfficePages/list-product/list-product.component';
 import { authGuard } from './Auth/AuthServices/auth.guard';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
+import { ListOrderComponent } from './BackOfficePages/list-order/list-order.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,6 +44,11 @@ export const routes: Routes = [
       {
         path: 'list-product',
         component: ListProductComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'list-order',
+        component: ListOrderComponent,
         canActivate: [authGuard],
       },
     ],

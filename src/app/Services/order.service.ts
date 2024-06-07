@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Order } from '../Models/order.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,12 @@ export class OrderService {
         throw error;
       })
     );
+  }
+  getOrdersForAdmin(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/admin/orders`);
+  }
+
+  updateOrderStatus(orderId: number, status: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${orderId}/status`, { status });
   }
 }

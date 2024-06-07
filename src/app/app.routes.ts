@@ -15,6 +15,7 @@ import { ListProductComponent } from './BackOfficePages/list-product/list-produc
 import { authGuard } from './Auth/AuthServices/auth.guard';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 import { ListOrderComponent } from './BackOfficePages/list-order/list-order.component';
+import { DeliveryOrdersComponent } from './BackOfficePages/delivery-orders/delivery-orders.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +50,11 @@ export const routes: Routes = [
       {
         path: 'list-order',
         component: ListOrderComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'list-order-delivery',
+        component: DeliveryOrdersComponent,
         canActivate: [authGuard],
       },
     ],

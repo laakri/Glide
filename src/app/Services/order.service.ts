@@ -42,4 +42,13 @@ export class OrderService {
   updateOrderStatus(orderId: number, status: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${orderId}/status`, { status });
   }
+
+  getOrdersForDelivery(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/delivery/orders`);
+  }
+
+  markOrderAsReadyForPickup(orderId: number): Observable<any> {
+    const url = `${this.apiUrl}/${orderId}/readyforpickup`;
+    return this.http.put(url, {});
+  }
 }

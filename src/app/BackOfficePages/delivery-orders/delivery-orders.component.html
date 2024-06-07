@@ -1,1 +1,48 @@
-<p>delivery-orders works!</p>
+<div class="container mx-auto p-6 min-h-[38rem]">
+  <h1 class="text-2xl font-bold mb-4">Delivery Orders Management</h1>
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>itemCount</th>
+        <th>Total</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+    @if(orders.length > 0){
+
+    <tbody>
+      @for(order of orders;track order){
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>
+          <span
+            class="badge"
+            [ngClass]="getOrderStatusText(order.status).color"
+          >
+            {{ getOrderStatusText(order.status).text }}
+          </span>
+        </td>
+        <td>{{ order.totalItems }}</td>
+        <td>{{ order.total }}</td>
+
+        <td>
+          <button
+            class="btn btn-sm btn-success"
+            (click)="markOrderAsReadyForPickup(order.id)"
+          >
+            Confirm
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+    } @else{
+    <div>
+      <p>No orders found.</p>
+    </div>
+    }
+  </table>
+</div>

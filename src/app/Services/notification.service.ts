@@ -1,33 +1,51 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Observable, Subject } from 'rxjs';
 import { Notification } from '../Models/notification.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:5152/api/Notification';
+  private hubConnection!: HubConnection;
+  private notificationsSubject: Subject<Notification> =
+    new Subject<Notification>();
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // Get notifications
-  getNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(this.apiUrl);
+  // Connect to SignalR hub
+  startConnection(): void {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('http://localhost:5152/notification')
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('SignalR connection started'))
+      .catch((err) =>
+        console.error('Error while starting SignalR connection: ' + err)
+      );
   }
 
-  // Create notification
-  createNotification(notification: Notification): Observable<Notification> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-    return this.http.post<Notification>(this.apiUrl, notification, httpOptions);
+  // Listen for incoming notifications
+  addNotificationListener(): void {
+    this.hubConnection.on(
+      'ReceiveNotification',
+      (notification: Notification) => {
+        this.notificationsSubject.next(notification);
+      }
+    );
   }
 
-  // Mark notification as read
-  markNotificationAsRead(id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}/read`, {});
+  // Get notifications observable
+  getNotifications(): Observable<Notification> {
+    return this.notificationsSubject.asObservable();
+  }
+
+  // Stop SignalR connection
+  stopConnection(): void {
+    if (this.hubConnection) {
+      this.hubConnection.stop();
+    }
   }
 }

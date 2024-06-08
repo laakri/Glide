@@ -1,1 +1,11 @@
-<p>notification works!</p>
+<h2>Notifications</h2>
+<ul>
+  @for(notification of notifications;track notification){
+  <li>
+    {{ notification.message }}
+    <!-- <button (click)="markAsRead(notification)" [disabled]="notification.isRead">
+      Mark as Read
+    </button> -->
+  </li>
+  }
+</ul>

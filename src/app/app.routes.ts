@@ -17,6 +17,7 @@ import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 import { ListOrderComponent } from './BackOfficePages/list-order/list-order.component';
 import { DeliveryOrdersComponent } from './BackOfficePages/delivery-orders/delivery-orders.component';
 import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component';
+import { NotificationComponent } from './Components/notification/notification.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'QrScanner', component: QrScannerComponent },
+  { path: 'Notification', component: NotificationComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

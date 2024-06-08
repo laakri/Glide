@@ -29,12 +29,22 @@
         <td>{{ order.total }}</td>
 
         <td>
+          @if( order.status == 1){
           <button
             class="btn btn-sm btn-success"
             (click)="markOrderAsReadyForPickup(order.id)"
           >
             Confirm
           </button>
+          }@else {
+
+          <button
+            class="btn btn-sm btn-primary"
+            (click)="SelectedProduct(order)"
+            onclick="my_modal_1.showModal()"
+          >
+            Open Order</button
+          >}
         </td>
       </tr>
       }
@@ -46,3 +56,61 @@
     }
   </table>
 </div>
+
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    @if(selectedOrder){
+    <div>
+      <div class="flex justify-between items-center">
+        <div class="w-32 h-32">
+          <qrcode
+            [qrdata]="qrData"
+            [width]="128"
+            [errorCorrectionLevel]="'M'"
+          ></qrcode>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg">Order Details</h3>
+          <p>Full Name: {{ selectedOrder.fullName }}</p>
+          <p>Date: {{ selectedOrder.date | date }}</p>
+          <p>
+            Address: {{ selectedOrder.address }}, {{ selectedOrder.city }},
+            {{ selectedOrder.postalCode }}
+          </p>
+          <p>Total Items: {{ selectedOrder.totalItems }}</p>
+          <p>Total: {{ selectedOrder.total | currency }}</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center mt-6">
+        <button
+          class="btn btn-sm btn-ghost"
+          (click)="toggleOrderItemsVisibility()"
+        >
+          {{ showOrderItems ? "Hide Items" : "Show Items" }}
+        </button>
+      </div>
+      @if(showOrderItems){
+      <div>
+        <h4 class="mt-4 font-bold">Order Items</h4>
+        <ul>
+          @for(item of selectedOrder.orderItems.$values; track item){
+          <li>
+            <p>Product Name: {{ item.name }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Price: {{ item.price | currency }}</p>
+            <p>Subtotal: {{ item.subtotal | currency }}</p>
+          </li>
+          }
+        </ul>
+      </div>
+      }
+    </div>
+
+    }
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

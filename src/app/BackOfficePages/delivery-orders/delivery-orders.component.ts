@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../Services/order.service';
 import { CommonModule } from '@angular/common';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-delivery-orders',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QRCodeModule],
   templateUrl: './delivery-orders.component.html',
 })
 export class DeliveryOrdersComponent implements OnInit {
   orders: any[] = [];
+  selectedOrder: any = [];
+  showOrderItems: boolean = false;
+  qrData: string = '';
 
   constructor(private orderService: OrderService) {}
 
@@ -36,6 +40,14 @@ export class DeliveryOrdersComponent implements OnInit {
         console.error('Error marking order as ready for pickup', error);
       }
     );
+  }
+  SelectedProduct(selectedOrder: any) {
+    this.selectedOrder = selectedOrder;
+    this.qrData = `${selectedOrder.id},${selectedOrder.userId}`;
+  }
+
+  toggleOrderItemsVisibility() {
+    this.showOrderItems = !this.showOrderItems;
   }
   getOrderStatusText(status: any): {
     text: string;

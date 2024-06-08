@@ -16,6 +16,7 @@ import { authGuard } from './Auth/AuthServices/auth.guard';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 import { ListOrderComponent } from './BackOfficePages/list-order/list-order.component';
 import { DeliveryOrdersComponent } from './BackOfficePages/delivery-orders/delivery-orders.component';
+import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'orderDetails/:orderId', component: OrderDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: 'QrScanner', component: QrScannerComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

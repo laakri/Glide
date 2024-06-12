@@ -1,9 +1,19 @@
 <div class="min-h-[38rem] mx-auto max-w-3xl p-2">
   <h2 class="text-xl font-bold mb-2">Notifications</h2>
+  @if(notifications.length == 0){
+  <div class="flex justify-center items-center w-full py-16">
+    <div class="text-center">
+      <h3 class="mt-2 text-lg font-medium">No Notification found</h3>
+      <p class="mt-1 text-md text-gray">
+        You must make some actions to get notified habibi.
+      </p>
+    </div>
+  </div>
+  }@else{
   <ul class="flex flex-col gap-2 p-2">
     @for(notification of notifications;track notification){
 
-    <li class="rounded-lg bg-base-100">
+    <li class="rounded-lg bg-base-300">
       <div class="flex items-center justify-between">
         <div>
           <p class="text-sm text-gray-500">
@@ -30,4 +40,5 @@
     </li>
     }
   </ul>
+  }
 </div>

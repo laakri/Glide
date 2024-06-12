@@ -1,0 +1,110 @@
+<h2 class="text-2xl font-semibold mb-4">Become a Delivery Person</h2>
+@if(!showForm){
+
+<div class="flex flex-col gap-4">
+  <span>
+    Interested in becoming a delivery person? Click the button below to start
+    your application process. Enhance your profile by joining our delivery team
+    and enjoy flexible working hours.
+  </span>
+  <button class="btn btn-primary" (click)="toggleForm()">
+    Apply to be a Delivery Person
+  </button>
+</div>
+} @if(showForm){
+<div class="mt-6 p-6">
+  <h3 class="text-xl font-semibold mb-4">Application Process</h3>
+  <ul class="steps steps-vertical lg:steps-horizontal mb-6">
+    <li class="step" [ngClass]="{ 'step-primary': currentStep >= 1 }">
+      Register
+    </li>
+    <li class="step" [ngClass]="{ 'step-primary': currentStep >= 2 }">
+      Provide Details
+    </li>
+    <li class="step" [ngClass]="{ 'step-primary': currentStep >= 3 }">
+      Verification
+    </li>
+    <li class="step" [ngClass]="{ 'step-primary': currentStep >= 4 }">
+      Start Delivering
+    </li>
+  </ul>
+
+  <div class="space-y-4">
+    @if(currentStep === 1){
+    <div>
+      <form>
+        <div class="form-control mb-4">
+          <label class="label" for="name">
+            <span class="label-text">Name</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            class="input input-bordered"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div class="form-control mb-4">
+          <label class="label" for="email">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="input input-bordered"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <button class="btn btn-primary w-full" (click)="nextStep()">
+          Next
+        </button>
+      </form>
+    </div>
+    } @if(currentStep === 2){
+    <div>
+      <form>
+        <div class="form-control mb-4">
+          <label class="label" for="phone">
+            <span class="label-text">Phone</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            class="input input-bordered"
+            placeholder="Enter your phone number"
+            required
+          />
+        </div>
+        <div class="form-control mb-4">
+          <label class="label" for="address">
+            <span class="label-text">Address</span>
+          </label>
+          <input
+            type="text"
+            id="address"
+            class="input input-bordered"
+            placeholder="Enter your address"
+            required
+          />
+        </div>
+        <button class="btn btn-primary w-full" (click)="nextStep()">
+          Next
+        </button>
+      </form>
+    </div>
+    } @if(currentStep === 3){
+    <div>
+      <p class="text-lg">Verification in progress...</p>
+      <button class="btn btn-primary mt-4" (click)="nextStep()">Next</button>
+    </div>
+    } @if(currentStep === 4){
+    <div>
+      <p class="text-lg">Congratulations! You are now a delivery person.</p>
+      <button class="btn btn-success mt-4" (click)="reset()">Finish</button>
+    </div>
+    }
+  </div>
+</div>
+}

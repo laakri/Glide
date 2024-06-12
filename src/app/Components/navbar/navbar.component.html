@@ -9,7 +9,7 @@
           <img class="h-6 w-auto" src="../../../assets/X-line.png" />
           <span class="text-2xl">Glide</span>
         </a>
-        <div class="hidden md:block">
+        <div class="hidden lg:block">
           <div class="ml-10 flex items-baseline space-x-4">
             <button
               [routerLink]="['/marketplace']"
@@ -126,7 +126,7 @@
             </div>
             <div
               tabindex="0"
-              class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-96 max-h-[24rem] overflow-auto"
+              class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-96 max-h-[24rem] overflow-auto"
             >
               <app-notification></app-notification>
             </div>
@@ -241,7 +241,7 @@
     </div>
   </div>
   @if(isMobileMenuOpen){
-  <div class="md:hidden" id="mobile-menu">
+  <div class="lg:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       <a
         href="#"

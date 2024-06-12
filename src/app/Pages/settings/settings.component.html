@@ -1,0 +1,61 @@
+<div class="max-w-[60rem] mx-auto p-6 rounded-lg shadow-lg min-h-[38rem]">
+  <h2 class="text-2xl font-semibold mb-4">Settings</h2>
+  <!-- Theme Selection -->
+  <div class="mb-6">
+    <label class="block mb-2 font-medium">Theme</label>
+    <div class="flex space-x-4">
+      @for(theme of themes;track theme){
+
+      <label class="flex items-center gap-3">
+        <input
+          type="checkbox"
+          class="checkbox checkbox-sm checkbox-primary"
+          (change)="changeTheme(theme)"
+          [checked]="settings.theme === theme"
+        />
+        {{ theme }}
+      </label>
+      }
+    </div>
+  </div>
+
+  <!-- Username Update -->
+  <div class="mb-6">
+    <label class="block mb-2 font-medium">Username</label>
+    <input
+      type="text"
+      [(ngModel)]="settings.username"
+      placeholder="User Name"
+      class="input input-bordered w-full max-w-xs"
+    />
+  </div>
+
+  <!-- Email Update -->
+  <div class="mb-6">
+    <label class="block mb-2 font-medium">Email</label>
+    <input
+      type="email"
+      [(ngModel)]="settings.email"
+      placeholder="User Email"
+      class="input input-bordered w-full max-w-xs"
+    />
+  </div>
+
+  <!-- Change Password -->
+  <div class="mb-6">
+    <label class="block mb-2 font-medium">Change Password</label>
+    <input
+      type="password"
+      [(ngModel)]="settings.password"
+      placeholder="User Password"
+      class="input input-bordered w-full max-w-xs"
+    />
+  </div>
+
+  <!-- Save Settings Button -->
+  <div>
+    <button class="btn btn-primary" (click)="saveSettings()">
+      Save Settings
+    </button>
+  </div>
+</div>

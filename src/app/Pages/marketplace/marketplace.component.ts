@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../Models/product.model';
 import { ProductService } from '../../Services/product.service';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../Services/cart.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CategoryService } from '../../Services/category.service';
 
 @Component({
   selector: 'app-marketplace',
@@ -12,37 +13,53 @@ import { RouterModule } from '@angular/router';
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './marketplace.component.html',
 })
-export class MarketplaceComponent {
+export class MarketplaceComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  categories: string[] = [
-    'Electronics',
-    'Fashion',
-    'Home Goods',
-    'Sports & Outdoors',
+  categories: any[] = [];
+  priceRanges: any[] = [
+    { label: '$0 - $100', min: 0, max: 100 },
+    { label: '$100 - $200', min: 100, max: 200 },
+    { label: '$200 - $300', min: 200, max: 300 },
+    { label: '$300+', min: 300, max: null },
   ];
-  priceRanges: any[] = ['$0 - $100', '$100 - $200', '$200 - $300', '$300+'];
   ratings: string[] = [
     '1 Star & Up',
     '2 Stars & Up',
     '3 Stars & Up',
     '4 Stars & Up',
   ];
-  selectedCategories: string[] = [];
-  selectedPriceRanges: string[] = [];
+  selectedCategories: number[] = [];
+  selectedPriceRanges: any[] = [];
   selectedRatings: string[] = [];
   searchTerm: string = '';
+  loading: boolean = false;
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
+    this.loadCategories();
     this.loadProducts();
   }
 
+  loadCategories(): void {
+    this.loading = true;
+    this.categoryService.getCategories().subscribe((response: any) => {
+      if (response && response.$values) {
+        this.categories = response.$values;
+      } else {
+        this.products = response;
+      }
+      this.loading = false;
+    });
+  }
+
   loadProducts(): void {
+    this.loading = true;
     this.productService.getProducts().subscribe((response: any) => {
       if (response && response.$values) {
         this.products = response.$values;
@@ -50,47 +67,58 @@ export class MarketplaceComponent {
         this.products = response;
       }
       this.applyFiltersAndSearch();
+      this.loading = false;
     });
   }
 
   applyFiltersAndSearch(): void {
-    this.filteredProducts = this.products.filter((product) => {
-      const passesCategoryFilter =
-        this.selectedCategories.length === 0 ||
-        this.selectedCategories.includes(product.category);
-      // const passesPriceFilter =
-      //   this.selectedPriceRanges.length === 0 ||
-      //   this.selectedPriceRanges.includes(product.priceRange);
-      // const passesRatingFilter =
-      //   this.selectedRatings.length === 0 ||
-      //   this.selectedRatings.includes(product.rating);
-      const passesSearchFilter =
-        this.searchTerm.trim() === '' ||
-        product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        product.description
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase());
-      return (
-        passesCategoryFilter &&
-        // passesPriceFilter &&
-        // passesRatingFilter &&
-        passesSearchFilter
+    this.loading = true;
+    let searchParams = new URLSearchParams();
+    if (this.searchTerm) {
+      searchParams.append('nameOrDescription', this.searchTerm);
+    }
+    if (this.selectedCategories.length > 0) {
+      this.selectedCategories.forEach((category) => {
+        searchParams.append('categories', category.toString());
+      });
+    }
+    if (this.selectedPriceRanges.length > 0) {
+      let minPrice = Math.min(
+        ...this.selectedPriceRanges.map((range) => range.min)
       );
-    });
+      let maxPrice = Math.max(
+        ...this.selectedPriceRanges.map((range) => range.max || Infinity)
+      );
+      searchParams.append('minPrice', minPrice.toString());
+      if (maxPrice !== Infinity) {
+        searchParams.append('maxPrice', maxPrice.toString());
+      }
+    }
+
+    this.productService
+      .searchProducts(searchParams.toString())
+      .subscribe((response: any) => {
+        if (response && response.$values) {
+          this.filteredProducts = response.$values;
+        } else {
+          this.filteredProducts = response;
+        }
+        this.loading = false;
+      });
   }
 
-  onCategoryChange(category: string): void {
-    if (this.selectedCategories.includes(category)) {
+  onCategoryChange(categoryId: number): void {
+    if (this.selectedCategories.includes(categoryId)) {
       this.selectedCategories = this.selectedCategories.filter(
-        (c) => c !== category
+        (c) => c !== categoryId
       );
     } else {
-      this.selectedCategories.push(category);
+      this.selectedCategories.push(categoryId);
     }
     this.applyFiltersAndSearch();
   }
 
-  onPriceRangeChange(priceRange: string): void {
+  onPriceRangeChange(priceRange: any): void {
     if (this.selectedPriceRanges.includes(priceRange)) {
       this.selectedPriceRanges = this.selectedPriceRanges.filter(
         (p) => p !== priceRange
@@ -109,11 +137,19 @@ export class MarketplaceComponent {
     }
     this.applyFiltersAndSearch();
   }
+  resetFilters(): void {
+    this.selectedCategories = [];
+    this.selectedPriceRanges = [];
+    this.selectedRatings = [];
+    this.searchTerm = '';
+    this.applyFiltersAndSearch();
+  }
 
   onSearchTermChange(): void {
     this.applyFiltersAndSearch();
   }
-  addToCart(product: Product) {
+
+  addToCart(product: Product): void {
     this.cartService.addToCart(product);
   }
 }

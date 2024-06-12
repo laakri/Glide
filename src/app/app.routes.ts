@@ -20,6 +20,7 @@ import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component
 import { NotificationComponent } from './Components/notification/notification.component';
 import { UpdateProductComponent } from './BackOfficePages/update-product/update-product.component';
 import { CategoryCrudComponent } from './BackOfficePages/category-crud/category-crud.component';
+import { SettingsComponent } from './Pages/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,18 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'order', component: OrderComponent },
   { path: 'product/:productId', component: ProductPageComponent },
-  { path: 'profile', component: ProfilePageComponent },
+
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'Settings',
+    component: SettingsComponent,
+    canActivate: [authGuard],
+  },
+
   { path: 'orderDetails/:orderId', component: OrderDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },

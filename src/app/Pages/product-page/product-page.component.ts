@@ -32,6 +32,7 @@ export class ProductPageComponent implements OnInit {
     this.productService.getProductById(this.productId).subscribe(
       (product: Product) => {
         this.product = product;
+        console.log(this.product);
       },
       (error) => {
         console.error(error);

@@ -14,7 +14,6 @@ module.exports = {
       "luxury",
       "black",
       "dracula",
-
       "sunset",
       "forest",
     ],

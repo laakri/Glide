@@ -5,20 +5,32 @@
       <ul>
         <li>
           <h3 class="menu-title">Categories</h3>
-          <ul>
-            @for (category of categories; track category) {
-            <li>
-              <label>
-                <input
-                  type="checkbox"
-                  (change)="onCategoryChange(category)"
-                  [checked]="selectedCategories.includes(category)"
-                />
-                {{ category }}
-              </label>
-            </li>
-            }
-          </ul>
+          @for(category of categories;track category){ @if(category.name){
+          <details open>
+            <summary>{{ category.name }}</summary>
+
+            <ul>
+              <li>
+                <ul>
+                  @for(sub of category.subCategories.$values;track sub){
+
+                  <li>
+                    <label>
+                      <input
+                        type="checkbox"
+                        class="checkbox checkbox-xs"
+                        (change)="onCategoryChange(sub.id)"
+                        [checked]="selectedCategories.includes(sub.id)"
+                      />
+                      {{ sub.name }}</label
+                    >
+                  </li>
+                  }
+                </ul>
+              </li>
+            </ul>
+          </details>
+          } }
         </li>
         <li>
           <h3 class="menu-title">Price Range</h3>
@@ -28,10 +40,11 @@
               <label>
                 <input
                   type="checkbox"
+                  class="checkbox checkbox-xs"
                   (change)="onPriceRangeChange(priceRange)"
                   [checked]="selectedPriceRanges.includes(priceRange)"
                 />
-                {{ priceRange }}
+                {{ priceRange.label }}
               </label>
             </li>
             }
@@ -45,6 +58,7 @@
               <label>
                 <input
                   type="checkbox"
+                  class="checkbox checkbox-xs"
                   (change)="onRatingChange(rating)"
                   [checked]="selectedRatings.includes(rating)"
                 />
@@ -68,10 +82,37 @@
       />
     </div>
     <div class="flex flex-wrap gap-4">
-      @for (product of filteredProducts; track product) {
-      <div
-        class="card w-[18.5rem] bg-base-100 shadow-xl border border-base-300"
-      >
+      @if(loading){
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+
+      } @else{ @if(filteredProducts.length == 0 ){
+
+      <div class="flex justify-center items-center w-full py-16">
+        <div class="text-center">
+          <h3 class="mt-2 text-lg font-medium">No products found</h3>
+          <p class="mt-1 text-md text-gray">
+            Try adjusting your filters or search term.
+          </p>
+          <button
+            class="mt-6 btn btn-sm btn-outline btn-primary"
+            (click)="resetFilters()"
+          >
+            Reset Filters
+          </button>
+        </div>
+      </div>
+      } @else{ @for (product of filteredProducts; track product) {
+
+      <div class="card w-[18.5rem] bg-base-200 shadow-xl">
         <figure class="h-48">
           <img src="{{ product.imageUrl }}" alt="Product Image" />
         </figure>
@@ -124,7 +165,7 @@
           </div>
         </div>
       </div>
-      }
+      }}}
     </div>
   </div>
 </div>

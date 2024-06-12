@@ -54,27 +54,8 @@ export class ProductService {
       })
     );
   }
-  searchProducts(
-    nameOrDescription?: string,
-    categories?: string[],
-    minPrice?: number,
-    maxPrice?: number
-  ): Observable<Product[]> {
-    const searchParams = new URLSearchParams();
-    if (nameOrDescription) {
-      searchParams.set('nameOrDescription', nameOrDescription);
-    }
-    if (categories && categories.length > 0) {
-      searchParams.set('categories', categories.join(','));
-    }
-    if (minPrice) {
-      searchParams.set('minPrice', minPrice.toString());
-    }
-    if (maxPrice) {
-      searchParams.set('maxPrice', maxPrice.toString());
-    }
-
-    const searchUrl = `${this.apiUrl}/search?${searchParams.toString()}`;
+  searchProducts(searchParams: string): Observable<Product[]> {
+    const searchUrl = `${this.apiUrl}/search?${searchParams}`;
     return this.http.get<Product[]>(searchUrl).pipe(
       catchError((error) => {
         throw error;

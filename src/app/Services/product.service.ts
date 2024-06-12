@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../Models/product.model';
 
@@ -12,7 +12,8 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  addProduct(productData: any): Observable<any> {
+  addProduct(productData: FormData): Observable<any> {
+    console.log(productData);
     return this.http.post<any>(this.apiUrl, productData).pipe(
       catchError((error) => {
         throw error;
@@ -45,7 +46,14 @@ export class ProductService {
       })
     );
   }
-
+  updateProduct(productId: number, productData: FormData): Observable<any> {
+    const updateUrl = `${this.apiUrl}/${productId}`;
+    return this.http.put<any>(updateUrl, productData).pipe(
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
+  }
   searchProducts(
     nameOrDescription?: string,
     categories?: string[],

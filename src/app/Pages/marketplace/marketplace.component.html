@@ -1,7 +1,7 @@
 <div class="mx-auto py-8 px-4 sm:px-6 lg:px-8 flex gap-2">
   <div class="flex flex-col items-center">
     <div class="menu bg-base-200 w-64 rounded-box p-4 sticky top-20">
-      <h2 class="menu-title dark:text-primary text-lg">Filters</h2>
+      <h2 class="menu-title dark:text-accent text-lg">Filters</h2>
       <ul>
         <li>
           <h3 class="menu-title">Categories</h3>
@@ -72,25 +72,22 @@
       <div
         class="card w-[18.5rem] bg-base-100 shadow-xl border border-base-300"
       >
-        <figure>
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Product Image"
-          />
+        <figure class="h-48">
+          <img src="{{ product.imageUrl }}" alt="Product Image" />
         </figure>
         <div class="card-body p-4">
           <div class="flex flex-col justify-between h-full">
             <div>
               <a
                 [routerLink]="['/product', product.id]"
-                class="text-blue-500 hover:underline"
+                class="text-accent hover:underline"
               >
-                <h2 class="card-title line-clamp-2">
+                <h2 class="card-title line-clamp-2 h-16">
                   {{ product.name }}
                 </h2>
               </a>
 
-              <p class="line-clamp-2 md:line-clamp-3">
+              <p class="line-clamp-2">
                 {{ product.shortDescription }}
               </p>
             </div>
@@ -101,7 +98,7 @@
           </div>
           <div class="card-actions w-full flex justify-center items-center">
             <button
-              class="btn btn-sm text-primary border-1 border-primary flex-grow"
+              class="btn btn-sm text-accent border-1 border-accent flex-grow"
             >
               Buy Now
             </button>

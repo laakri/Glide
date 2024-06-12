@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../Models/product.model';
 import { ToastService } from '../../Services/toast.service';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-list-product',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './list-product.component.html',
-  styleUrl: './list-product.component.css',
 })
 export class ListProductComponent {
   products!: Product[];
@@ -16,7 +17,8 @@ export class ListProductComponent {
 
   constructor(
     private productService: ProductService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,13 +26,15 @@ export class ListProductComponent {
   }
 
   loadProducts(): void {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
+    this.productService.getProducts().subscribe((response: any) => {
+      if (response && response.$values) {
+        this.products = response.$values;
+      }
     });
   }
 
   editProduct(product: Product): void {
-    // Implement edit functionality
+    this.router.navigate(['/dashboard/update-product', product.id]);
   }
 
   deleteProduct(productId: number): void {

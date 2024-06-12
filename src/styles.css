@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dropdown-content::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .dropdown-content::-webkit-scrollbar-track {
+    background: #3a3a3a; /* Background of the scrollbar track */
+    border-radius: 10px;
+  }
+  
+  .dropdown-content::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 10px;
+  }
+  
+  .dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar thumb when hovered */
+  }
+  
+  /* Custom scrollbar for Firefox */
+  .dropdown-content {
+    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #888 #a9a9a9; /* Scrollbar thumb color and track color */
+  }
+  
+  /* Hover effect for Firefox */
+  .dropdown-content:hover {
+    scrollbar-color: #555 #919191;
+  }
+  

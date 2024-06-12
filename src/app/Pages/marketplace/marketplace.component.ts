@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './marketplace.component.html',
-  styleUrl: './marketplace.component.css',
 })
 export class MarketplaceComponent {
   products: Product[] = [];

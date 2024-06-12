@@ -1,8 +1,8 @@
 <div class="container mx-auto p-6">
-  <h1 class="text-2xl font-bold mb-4">Add Product</h1>
+  <h1 class="text-2xl font-bold mb-4">Update Product</h1>
   <form
-    #addProductForm="ngForm"
-    (ngSubmit)="submitAddProduct(addProductForm)"
+    #updateProductForm="ngForm"
+    (ngSubmit)="submitUpdateProduct(updateProductForm)"
     class="space-y-4"
   >
     <div class="space-y-1">
@@ -12,7 +12,7 @@
         id="name"
         class="input input-bordered w-full"
         placeholder="Enter product name"
-        ngModel
+        [(ngModel)]="product.name"
         name="name"
         required
       />
@@ -25,7 +25,7 @@
         id="description"
         class="textarea textarea-bordered w-full"
         placeholder="Enter product description"
-        ngModel
+        [(ngModel)]="product.description"
         name="description"
         required
       ></textarea>
@@ -38,7 +38,7 @@
         id="shortDescription"
         class="textarea textarea-bordered w-full"
         placeholder="Enter short description"
-        ngModel
+        [(ngModel)]="product.shortDescription"
         name="shortDescription"
         required
       ></textarea>
@@ -50,7 +50,7 @@
         id="price"
         class="input input-bordered w-full"
         placeholder="Enter price"
-        ngModel
+        [(ngModel)]="product.price"
         name="price"
         required
       />
@@ -62,11 +62,23 @@
         id="stock"
         class="input input-bordered w-full"
         placeholder="Enter stock"
-        ngModel
+        [(ngModel)]="product.stock"
         name="stock"
         required
       />
     </div>
+    <!-- <div class="space-y-1">
+      <label for="category" class="block font-semibold">Category:</label>
+      <input
+        type="text"
+        id="category"
+        class="input input-bordered w-full"
+        placeholder="Enter category"
+        [(ngModel)]="product.category"
+        name="category"
+        required
+      />
+    </div> -->
     <div class="space-y-1">
       <label for="category" class="block font-semibold">Category:</label>
       <select
@@ -84,17 +96,23 @@
         }}}
       </select>
     </div>
-
+    @if(product.imageUrl){
     <div class="space-y-1">
-      <label for="image" class="block font-semibold">Product Image:</label>
+      <label class="block font-semibold">Current Product Image:</label>
+      <img [src]="product.imageUrl" alt="Product Image" class="w-40 h-auto" />
+    </div>
+    }
+    <div class="space-y-1">
+      <label for="image" class="block font-semibold"
+        >Update Product Image:</label
+      >
       <input
         type="file"
         id="image"
         class="input input-bordered w-full"
         (change)="onFileChange($event)"
-        required
       />
     </div>
-    <button type="submit" class="btn btn-primary w-full">Add Product</button>
+    <button type="submit" class="btn btn-primary w-full">Update Product</button>
   </form>
 </div>

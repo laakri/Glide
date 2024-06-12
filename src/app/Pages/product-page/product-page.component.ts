@@ -10,7 +10,6 @@ import { CartService } from '../../Services/cart.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './product-page.component.html',
-  styleUrl: './product-page.component.css',
 })
 export class ProductPageComponent implements OnInit {
   productId!: number;

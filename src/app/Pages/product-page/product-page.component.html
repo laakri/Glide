@@ -5,12 +5,12 @@
         <div class="h-[460px] overflow-hidden">
           <img
             class="w-full h-full object-cover rounded-xl"
-            src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+            src="{{ product.imageUrl }}"
             alt="Product Image"
           />
         </div>
       </div>
-      <div class="md:flex-1 px-4">
+      <div class="flex flex-col md:flex-1 px-4 justify-between">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           {{ product.name }}
         </h2>

@@ -1,33 +1,38 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NotificationService } from '../../Services/notification.service';
-import { Notification } from '../../Models/notification.model';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { SseService } from '../../Services/notification.service';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-notification',
   standalone: true,
   imports: [CommonModule],
+  providers: [SseService],
   templateUrl: './notification.component.html',
 })
-export class NotificationComponent implements OnInit, OnDestroy {
-  notifications: Notification[] = [];
-  notificationSubscription!: Subscription;
+export class NotificationComponent implements OnInit {
+  notifications: any[] = [];
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(private sseService: SseService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.notificationService.startConnection();
-    this.notificationService.addNotificationListener();
-    this.notificationSubscription = this.notificationService
-      .getNotifications()
-      .subscribe((notification) => {
-        this.notifications.push(notification);
-      });
+    this.fetchNotifications();
   }
 
-  ngOnDestroy(): void {
-    this.notificationService.stopConnection();
-    this.notificationSubscription.unsubscribe();
+  fetchNotifications() {
+    this.sseService.getNotifications().subscribe(
+      (newNotification) => {
+        this.notifications.unshift(newNotification);
+        this.cd.detectChanges();
+      },
+      (error) => {
+        console.error('Error receiving notification:', error);
+      }
+    );
+  }
+
+  markAsRead(notificationId: number): void {
+    this.sseService.markNotificationAsRead(notificationId);
+    this.fetchNotifications();
   }
 }

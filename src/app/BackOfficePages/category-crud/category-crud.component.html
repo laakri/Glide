@@ -1,0 +1,87 @@
+<div class="container mx-auto p-6 min-h-[38rem]">
+  <h2 class="text-2xl font-bold mb-4">Category Management</h2>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div class="form-group">
+      <label for="name" class="block text-sm font-medium">Name</label>
+      <input
+        id="name"
+        formControlName="name"
+        placeholder="Category Name "
+        class="input input-bordered w-full"
+      />
+    </div>
+    @if(!editMode){
+    <div class="form-group">
+      <label for="parentCategoryId" class="block text-sm font-medium"
+        >Parent Category</label
+      >
+      <select
+        id="parentCategoryId"
+        formControlName="parentCategoryId"
+        class="select select-bordered w-full"
+      >
+        <option [ngValue]="null">None</option>
+        @for(category of categories;track category){ @if(category.name){
+        <option [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+        } }
+      </select>
+    </div>
+    }
+
+    <div class="flex space-x-4">
+      <button type="submit" class="btn btn-sm btn-primary">
+        {{ editMode ? "Update" : "Add" }} Category
+      </button>
+      @if(editMode){
+      <button
+        type="button"
+        class="btn btn-sm btn-secondary"
+        (click)="onCancel()"
+      >
+        Cancel
+      </button>
+      }
+    </div>
+  </form>
+
+  <h3 class="text-xl font-semibold mt-6 mb-4">Categories</h3>
+  <ul class="list-none space-y-2">
+    @for(category of categories;track category){ @if(category.name){
+    <li class="bg-base-300 p-4 rounded">
+      <div class="flex justify-between items-center">
+        {{ category.name }}
+        <div class="flex space-x-2">
+          <button class="btn btn-warning btn-xs" (click)="onEdit(category)">
+            Edit
+          </button>
+          <button class="btn btn-error btn-xs" (click)="onDelete(category.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </li>
+    <li class="ml-6 mr-2 my-4 rounded">
+      <ul>
+        @for(sub of category.subCategories.$values;track sub){
+        <li class="bg-base-200 m-2 p-4 rounded shadow-md">
+          <div class="flex justify-between items-center">
+            <span>{{ sub.name }}</span>
+            <div class="flex space-x-2">
+              <button class="btn btn-warning btn-xs" (click)="onEdit(sub)">
+                Edit
+              </button>
+              <button class="btn btn-error btn-xs" (click)="onDelete(sub.id)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </li>
+        }
+      </ul>
+    </li>
+    } }
+  </ul>
+</div>

@@ -18,6 +18,8 @@ import { ListOrderComponent } from './BackOfficePages/list-order/list-order.comp
 import { DeliveryOrdersComponent } from './BackOfficePages/delivery-orders/delivery-orders.component';
 import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component';
 import { NotificationComponent } from './Components/notification/notification.component';
+import { UpdateProductComponent } from './BackOfficePages/update-product/update-product.component';
+import { CategoryCrudComponent } from './BackOfficePages/category-crud/category-crud.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,12 +47,26 @@ export const routes: Routes = [
           ),
         canActivate: [authGuard],
       },
+      {
+        path: 'update-product/:productId',
+        loadComponent: () =>
+          import(
+            './BackOfficePages/update-product/update-product.component'
+          ).then((mod) => mod.UpdateProductComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'categories',
+        component: CategoryCrudComponent,
+        canActivate: [authGuard],
+      },
 
       {
         path: 'list-product',
         component: ListProductComponent,
         canActivate: [authGuard],
       },
+
       {
         path: 'list-order',
         component: ListOrderComponent,

@@ -1,11 +1,33 @@
-<h2>Notifications</h2>
-<ul>
-  @for(notification of notifications;track notification){
-  <li>
-    {{ notification.message }}
-    <!-- <button (click)="markAsRead(notification)" [disabled]="notification.isRead">
-      Mark as Read
-    </button> -->
-  </li>
-  }
-</ul>
+<div class="min-h-[38rem] mx-auto max-w-3xl p-2">
+  <h2 class="text-xl font-bold mb-2">Notifications</h2>
+  <ul class="flex flex-col gap-2 p-2">
+    @for(notification of notifications;track notification){
+
+    <li class="rounded-lg bg-base-100">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-500">
+            {{ notification.CreatedAt | date : "dd/MM/yyyy HH:mm:ss" }}
+          </p>
+
+          <div class="flex items-center gap-2">
+            @if(notification.IsRead == false){
+            <div class="bg-red-500 rounded-xl w-2 h-2"></div>
+            }
+            <p class="font-semibold">{{ notification.Title }}</p>
+          </div>
+          <p class="text-gray">{{ notification.Message }}</p>
+          @if(notification.IsRead == false){
+          <button
+            (click)="markAsRead(notification.Id)"
+            class="btn btn-xs btn-ghost text-primary"
+          >
+            Mark as Read
+          </button>
+          }
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+</div>

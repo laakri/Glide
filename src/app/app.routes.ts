@@ -5,7 +5,7 @@ import { MarketplaceComponent } from './Pages/marketplace/marketplace.component'
 import { CartComponent } from './Pages/cart/cart.component';
 import { OrderComponent } from './Pages/order/order.component';
 import { ProductPageComponent } from './Pages/product-page/product-page.component';
-import { ProfilePageComponent } from './Pages/profile-page/profile-page.component';
+import { ProfilePageComponent } from './Profile/profile-page/profile-page.component';
 import { OrderDetailsComponent } from './Pages/order-details/order-details.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
@@ -20,7 +20,7 @@ import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component
 import { NotificationComponent } from './Components/notification/notification.component';
 import { UpdateProductComponent } from './BackOfficePages/update-product/update-product.component';
 import { CategoryCrudComponent } from './BackOfficePages/category-crud/category-crud.component';
-import { SettingsComponent } from './Pages/settings/settings.component';
+import { SettingsComponent } from './Profile/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

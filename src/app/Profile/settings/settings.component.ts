@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ThemeService } from '../../Services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,12 +16,18 @@ export class SettingsComponent implements OnInit {
     password: '',
   };
 
-  themes = ['sunset', 'light', 'dark', 'forest'];
+  themes = ['sunset', 'light', 'forest'];
 
-  constructor() {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.loadSettings();
+    const theme = this.themeService.getTheme();
+    if (theme) {
+      this.settings.theme = theme;
+    } else {
+      this.settings.theme = 'sunset';
+    }
   }
 
   loadSettings(): void {
@@ -38,7 +45,7 @@ export class SettingsComponent implements OnInit {
 
   changeTheme(theme: string): void {
     this.settings.theme = theme;
-    this.applyTheme(theme);
+    this.themeService.saveTheme(theme);
   }
 
   applyTheme(theme: string): void {

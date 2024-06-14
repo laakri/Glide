@@ -10,7 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css',
 })
 export class ProfilePageComponent implements OnInit {
   user: any = {};
@@ -42,9 +41,6 @@ export class ProfilePageComponent implements OnInit {
   }
   viewOrder(orderId: number) {
     this.router.navigate(['/orderDetails', orderId]);
-  }
-  editProfile() {
-    console.log('Edit Profile button clicked');
   }
 
   submitProfile(form: NgForm) {

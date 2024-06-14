@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.css'],
 })
 export class OrderDetailsComponent implements OnInit {
   order: any = {};
@@ -26,6 +25,7 @@ export class OrderDetailsComponent implements OnInit {
       this.orderService.getOrderById(orderId).subscribe(
         (order) => {
           this.order = order;
+          console.log(this.order);
           this.calculateTotal();
         },
         (error) => {
@@ -39,13 +39,33 @@ export class OrderDetailsComponent implements OnInit {
   calculateTotal() {
     this.total = 0;
     if (this.order.orderItems) {
-      this.order.orderItems.forEach((item: any) => {
+      this.order.orderItems.$values.forEach((item: any) => {
         this.total += item.product.price * item.quantity;
       });
     }
+    console.log(this.total);
   }
 
   editProfile() {
     console.log('Edit Profile button clicked');
+  }
+  getOrderStatusText(status: any): {
+    text: string;
+    color: string;
+  } {
+    switch (status) {
+      case 0:
+        return { text: 'Pending ...', color: 'badge-warning' };
+      case 1:
+        return { text: 'Processing', color: 'badge-warning' };
+      case 2:
+        return { text: 'Ready for Pickup', color: 'badge-info' };
+      case 3:
+        return { text: 'Delivered', color: 'badge-success' };
+      case 4:
+        return { text: 'Cancelled', color: 'badge-error' };
+      default:
+        return { text: 'Unknown', color: '' };
+    }
   }
 }

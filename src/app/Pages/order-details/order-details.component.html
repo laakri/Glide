@@ -23,14 +23,19 @@
             <span class="label-text font-bold">Status:</span>
           </label>
           <div class="text-lg">
-            <span class="badge badge-success">{{ order.status }}</span>
+            <span
+              class="badge"
+              [ngClass]="getOrderStatusText(order.status).color"
+            >
+              {{ getOrderStatusText(order.status).text }}
+            </span>
           </div>
         </div>
         <div>
           <label class="label">
             <span class="label-text font-bold">Total:</span>
           </label>
-          <div class="text-lg">{{ order.total | currency }}</div>
+          <div class="text-lg">{{ total | currency }}</div>
         </div>
       </div>
     </div>
@@ -92,7 +97,9 @@
                     </div>
                   </div>
                   <div>
-                    <div class="font-bold">{{ product.product.name }}</div>
+                    <div class="font-bold line-clamp-2">
+                      {{ product.product.name }}
+                    </div>
                     <div class="text-sm opacity-50">
                       {{ product.product.category }}
                     </div>
@@ -100,7 +107,9 @@
                 </div>
               </td>
 
-              <td>{{ product.product.description }}</td>
+              <td class="line-clamp-1">
+                {{ product.product.shortDescription }}
+              </td>
               <td>{{ product.product.price | currency }}</td>
               <td>{{ product.quantity }}</td>
               <td>

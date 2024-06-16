@@ -21,6 +21,7 @@ import { SettingsComponent } from './Profile/settings/settings.component';
 import { AccountSettingsComponent } from './Profile/account-settings/account-settings.component';
 import { DeveloperSettingsComponent } from './Profile/developer-settings/developer-settings.component';
 import { DeliverySettingsComponent } from './Profile/delivery-settings/delivery-settings.component';
+import { ReportCreateComponent } from './Profile/report-create/report-create.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'product/:productId', component: ProductPageComponent },
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'create-report', component: ReportCreateComponent },
   {
     path: 'settings',
     component: SettingsComponent,

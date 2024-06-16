@@ -10,7 +10,7 @@ export interface Report {
 export interface ReportRequest {
   description: string;
   userId: string;
-  orderId: number;
+  orderId: string;
 }
 
 export enum ReportStatus {

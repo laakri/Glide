@@ -1,20 +1,49 @@
-<div
-  class="hero min-h-[20rem]"
-  style="
-    background-image: url(https://i.gyazo.com/b928bef1bb59be0564a15a8266d98264.png);
-  "
->
-  <div class="hero-overlay bg-opacity-60"></div>
-  <div class="hero-content text-center text-white">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-bold">Welcome to Glide!</h1>
-      <p class="mb-5">
-        Discover the latest trends and deals in fashion, electronics, home
-        goods, and more at Glide. We offer a wide range of products .
-      </p>
-      <button class="btn">Shop Now</button>
+<div class="hero min-h-[20rem] carousel w-full">
+  <!-- Carousel Item 1 -->
+  <div id="slide1" class="carousel-item relative w-full">
+    <div
+      class="hero min-h-[20rem]"
+      style="
+        background-image: url(https://i.gyazo.com/b928bef1bb59be0564a15a8266d98264.png);
+      "
+    >
+      <div class="hero-overlay bg-opacity-60"></div>
+      <div class="hero-content text-center text-white">
+        <div class="max-w-md">
+          <h1 class="mb-5 text-5xl font-bold">Welcome to Glide!</h1>
+          <p class="mb-5">
+            Discover the latest trends and deals in fashion, electronics, home
+            goods, and more at Glide. We offer a wide range of products.
+          </p>
+          <button class="btn">Shop Now</button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+    >
+      <a href="#slide4" class="btn btn-circle">❮</a>
+      <a href="#slide2" class="btn btn-circle">❯</a>
     </div>
   </div>
+
+  <!-- Carousel Item 2 -->
+  <div id="slide2" class="carousel-item relative w-full">
+    <div
+      class="hero min-h-[20rem]"
+      style="background-image: url(https://example.com/image2.jpg)"
+    >
+      <!-- Your hero content for slide 2 -->
+    </div>
+    <div
+      class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+    >
+      <a href="#slide1" class="btn btn-circle">❮</a>
+      <a href="#slide3" class="btn btn-circle">❯</a>
+    </div>
+  </div>
+
+  <!-- Add more carousel items as needed -->
 </div>
 <div class="min-h-screen">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

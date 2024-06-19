@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
   cartItems: { product: Product; quantity: number }[] = [];

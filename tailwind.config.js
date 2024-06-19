@@ -7,6 +7,13 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
+      {
+        sunset: {
+          ...require("daisyui/src/theming/themes")["sunset"],
+          primary: "#72ddf7",
+        },
+      },
+
       "light",
       "dark",
       "synthwave",
@@ -14,7 +21,6 @@ module.exports = {
       "luxury",
       "black",
       "dracula",
-      "sunset",
       "forest",
     ],
   },

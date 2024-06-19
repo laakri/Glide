@@ -68,7 +68,13 @@
                 <button class="btn btn-sm mr-2" (click)="viewOrder(order.id)">
                   View
                 </button>
-                <button class="btn btn-xs text-red-400">Report!</button>
+                <button
+                  class="btn btn-xs text-red-400"
+                  (click)="reportOrder(order.id, user.userId)"
+                  onclick="my_modal_1.showModal()"
+                >
+                  Report
+                </button>
               </td>
             </tr>
             }
@@ -78,3 +84,37 @@
     </div>
   </div>
 </div>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">
+      Create a Report for Order N°: {{ reportOrderId }}
+    </h3>
+    <form
+      #addReportForm="ngForm"
+      (ngSubmit)="onSubmit(addReportForm)"
+      class="space-y-5 mt-2"
+    >
+      <div class="space-y-1">
+        <label for="description" class="block font-semibold"
+          >Description:</label
+        >
+        <input
+          id="description"
+          name="description"
+          placeholder="Write your DEscription over here please "
+          class="textarea textarea-bordered w-full h-24"
+          ngModel
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">
+        Create Report
+      </button>
+    </form>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

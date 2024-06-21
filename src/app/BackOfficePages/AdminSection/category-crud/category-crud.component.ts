@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CategoryService } from '../../Services/category.service';
 import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../../Services/category.service';
 
 @Component({
   selector: 'app-category-crud',

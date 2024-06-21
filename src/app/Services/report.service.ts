@@ -15,8 +15,8 @@ export class ReportService {
     return this.http.post<any>(`${this.apiUrl}`, reportRequest);
   }
 
-  getReports(): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.apiUrl}`);
+  getReports(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   getReportById(id: number): Observable<Report> {

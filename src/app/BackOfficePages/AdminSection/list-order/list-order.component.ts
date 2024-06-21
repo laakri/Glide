@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Order } from '../../Models/order.model';
-import { OrderService } from '../../Services/order.service';
 import { CommonModule } from '@angular/common';
-import { ToastService } from '../../Services/toast.service';
+import { ToastService } from '../../../Services/toast.service';
+import { OrderService } from '../../../Services/order.service';
+import { Order } from '../../../Models/order.model';
 
 @Component({
   selector: 'app-list-order',

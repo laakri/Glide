@@ -276,6 +276,13 @@
           <button [routerLink]="['/dashboard']" class="btn btn-sm btn-ghost">
             Dashboard
           </button>
+          } @if(isLoggedIn){
+          <button
+            [routerLink]="['/list-order-delivery']"
+            class="btn btn-sm btn-ghost"
+          >
+            Delivery
+          </button>
           }
         </div>
       </div>

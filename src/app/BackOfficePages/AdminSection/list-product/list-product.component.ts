@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../../Services/product.service';
-import { Product } from '../../Models/product.model';
-import { ToastService } from '../../Services/toast.service';
+import { ToastService } from '../../../Services/toast.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { ProductService } from '../../../Services/product.service';
+import { Product } from '../../../Models/product.model';
 
 @Component({
   selector: 'app-list-product',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ProductService } from '../../Services/product.service';
-import { ToastService } from '../../Services/toast.service';
-import { CategoryService } from '../../Services/category.service';
+import { ProductService } from '../../../Services/product.service';
+import { ToastService } from '../../../Services/toast.service';
+import { CategoryService } from '../../../Services/category.service';
 
 @Component({
   selector: 'app-add-product',

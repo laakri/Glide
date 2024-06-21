@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from '../../Services/order.service';
 import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
+import { OrderService } from '../../../Services/order.service';
 
 @Component({
   selector: 'app-delivery-orders',

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../Services/product.service';
-import { ToastService } from '../../Services/toast.service';
-import { Product } from '../../Models/product.model';
-import { CategoryService } from '../../Services/category.service';
+import { ToastService } from '../../../Services/toast.service';
+import { Product } from '../../../Models/product.model';
+import { ProductService } from '../../../Services/product.service';
+import { CategoryService } from '../../../Services/category.service';
 
 @Component({
   selector: 'app-update-product',

@@ -8,19 +8,20 @@ import { ProfilePageComponent } from './Profile/profile-page/profile-page.compon
 import { OrderDetailsComponent } from './Pages/order-details/order-details.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
-import { DashboardComponent } from './BackOfficePages/dashboard/dashboard.component';
-import { ListProductComponent } from './BackOfficePages/list-product/list-product.component';
+import { DashboardComponent } from './BackOfficePages/AdminSection/dashboard/dashboard.component';
 import { authGuard } from './Auth/AuthServices/auth.guard';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
-import { ListOrderComponent } from './BackOfficePages/list-order/list-order.component';
-import { DeliveryOrdersComponent } from './BackOfficePages/delivery-orders/delivery-orders.component';
 import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component';
 import { NotificationComponent } from './Components/notification/notification.component';
-import { CategoryCrudComponent } from './BackOfficePages/category-crud/category-crud.component';
 import { SettingsComponent } from './Profile/settings/settings.component';
 import { AccountSettingsComponent } from './Profile/account-settings/account-settings.component';
 import { DeveloperSettingsComponent } from './Profile/developer-settings/developer-settings.component';
 import { DeliverySettingsComponent } from './Profile/delivery-settings/delivery-settings.component';
+import { CategoryCrudComponent } from './BackOfficePages/AdminSection/category-crud/category-crud.component';
+import { ListProductComponent } from './BackOfficePages/AdminSection/list-product/list-product.component';
+import { ListOrderComponent } from './BackOfficePages/AdminSection/list-order/list-order.component';
+import { DeliveryOrdersComponent } from './BackOfficePages/DeliverySection/delivery-orders/delivery-orders.component';
+import { ReportListComponent } from './BackOfficePages/AdminSection/report-list/report-list.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -63,6 +64,11 @@ export const routes: Routes = [
   { path: 'QrScanner', component: QrScannerComponent },
   { path: 'Notification', component: NotificationComponent },
   {
+    path: 'list-order-delivery',
+    component: DeliveryOrdersComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
@@ -71,16 +77,16 @@ export const routes: Routes = [
       {
         path: 'add-product',
         loadComponent: () =>
-          import('./BackOfficePages/add-product/add-product.component').then(
-            (mod) => mod.AddProductComponent
-          ),
+          import(
+            './BackOfficePages/AdminSection/add-product/add-product.component'
+          ).then((mod) => mod.AddProductComponent),
         canActivate: [authGuard],
       },
       {
         path: 'update-product/:productId',
         loadComponent: () =>
           import(
-            './BackOfficePages/update-product/update-product.component'
+            './BackOfficePages/AdminSection/update-product/update-product.component'
           ).then((mod) => mod.UpdateProductComponent),
         canActivate: [authGuard],
       },
@@ -95,15 +101,14 @@ export const routes: Routes = [
         component: ListProductComponent,
         canActivate: [authGuard],
       },
-
       {
         path: 'list-order',
         component: ListOrderComponent,
         canActivate: [authGuard],
       },
       {
-        path: 'list-order-delivery',
-        component: DeliveryOrdersComponent,
+        path: 'list-report',
+        component: ReportListComponent,
         canActivate: [authGuard],
       },
     ],

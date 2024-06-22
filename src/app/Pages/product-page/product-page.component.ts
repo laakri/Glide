@@ -1,26 +1,29 @@
+import { ToastService } from './../../Services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../Models/product.model';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../Services/cart.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-page.component.html',
 })
 export class ProductPageComponent implements OnInit {
   productId!: number;
   product!: Product;
-  ratingValue: number = 0;
+  ratingValue: number = 5;
   ratingDescription: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -60,20 +63,17 @@ export class ProductPageComponent implements OnInit {
 
   rateProduct() {
     const rating: any = {
-      userId: '',
-      productId: this.productId,
       Score: this.ratingValue,
       Comment: this.ratingDescription,
-      createdAt: new Date(),
     };
-
+    console.log(rating);
     this.productService.rateProduct(this.productId, rating).subscribe(
       (response) => {
-        console.log('Rating submitted:', response);
+        this.toastService.showToast('Rating submitted', 'success');
         this.getProduct();
       },
       (error) => {
-        console.error('Error submitting rating:', error);
+        this.toastService.showToast('Error submitting rating', 'error');
       }
     );
   }

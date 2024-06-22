@@ -10,4 +10,5 @@ export interface Product {
   sizes: any;
   stock: number;
   stockQuantity: number;
+  ratings: any;
 }

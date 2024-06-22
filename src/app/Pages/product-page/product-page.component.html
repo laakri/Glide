@@ -191,48 +191,30 @@
           </div>
         </div>
         <div class="mt-6">
+          @if(product.ratings.$values){ @for(comment of product.ratings.$values
+          ;track comment){
           <div class="bg-base-200 p-4 rounded-lg mb-4">
             <div class="flex flex-col">
               <div class="flex items-center gap-2">
-                <div class="text-lg font-bold">Jese Leos</div>
+                <div class="text-lg font-bold">{{ comment.user.username }}</div>
 
                 <div class="rating rating-xs">
+                  @if(comment.score){ @for(rate of comment.score ;track rate ){
                   <input
                     type="radio"
                     name="rating-6"
                     class="mask mask-star-2 bg-orange-400"
                   />
-                  <input
-                    type="radio"
-                    name="rating-6"
-                    class="mask mask-star-2 bg-orange-400"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-6"
-                    class="mask mask-star-2 bg-orange-400"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-6"
-                    class="mask mask-star-2 bg-orange-400"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-6"
-                    class="mask mask-star-2 bg-orange-400"
-                    checked
-                  />
+                  }}
                 </div>
               </div>
-              <div class="text-sm text-gray-400">November 18 2023 at 15:35</div>
+              <div class="text-sm text-gray-400">{{ comment.createdAt }}</div>
             </div>
             <div class="mt-2 text-gray-300">
-              It's fancy, amazing keyboard, matching accessories. Super fast,
-              batteries last more than usual, everything runs perfect in this
-              computer. Highly recommend!
+              {{ comment.comment }}
             </div>
           </div>
+          }}
         </div>
       </div>
     </div>
@@ -240,13 +222,12 @@
 </div>
 <dialog id="my_modal_1" class="modal">
   <div method="dialog" class="modal-box">
-    <form #reviewForm="ngForm" (ngSubmit)="rateProduct()">
-      <button
-        type="button"
-        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-      >
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
         ✕
       </button>
+    </form>
+    <form #reviewForm="ngForm" (ngSubmit)="rateProduct()">
       <h3 class="font-bold text-lg">Add a review for:</h3>
       <span class="line-clamp-1">{{ product.name }}</span>
       <div class="divider"></div>

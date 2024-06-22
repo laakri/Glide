@@ -42,6 +42,19 @@ export class AddProductComponent implements OnInit {
     if (this.selectedFile) {
       formData.append('image', this.selectedFile, this.selectedFile.name);
     }
+    const colors = addProductForm.value.colors
+      .split(' ')
+      .map((color: string) => color.trim());
+    const sizes = addProductForm.value.sizes
+      .split(' ')
+      .map((size: string) => size.trim());
+    console.log(sizes);
+    const colorsjson = JSON.stringify(addProductForm.value.colors);
+    const sizesjson = JSON.stringify(addProductForm.value.sizes);
+    console.log(sizesjson);
+
+    formData.append('colors', colorsjson);
+    formData.append('sizes', sizesjson);
     this.productService.addProduct(formData).subscribe(
       (response) => {
         this.toastService.showToast('Product added successfully .', 'success');

@@ -1,6 +1,6 @@
 <div class="min-h-[38rem] py-8">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row -mx-4">
+    <div class="flex flex-col lg:flex-row gap-4">
       <div class="md:flex-1 px-4">
         <div class="h-[460px] overflow-hidden">
           <img
@@ -10,18 +10,8 @@
           />
         </div>
       </div>
-      <div class="flex flex-col md:flex-1 px-4 justify-between">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          {{ product.name }}
-        </h2>
-        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-          {{ product.shortDescription }}
-        </p>
-        <div class="mb-4" [ngClass]="getStockClass()">
-          <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Availability :</span
-          >
-
+      <div class="flex flex-col md:flex-1 px-4 justify-between gap-2">
+        <div class="badge" [ngClass]="getStockClass()">
           @if(product.stock === undefined || product.stock === null){
           <span> Availability Unknown </span>
           }@else if(product.stock === 0){
@@ -31,53 +21,53 @@
           }@else if(product.stock > 10){
           <span> In Stock ({{ product.stock }} left) </span> }
         </div>
-        <div class="mb-4">
-          <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Category :
-          </span>
-          <span class="text-gray-600 dark:text-gray-300">
-            {{ product.category.name }}
-          </span>
-        </div>
-        <!-- 
-        <div class="mb-4">
-          <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Select Size:</span
-          >
-          <div class="flex items-center mt-2">
-            <button
-              class="g-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
-            >
-              S
-            </button>
-            <button
-              class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
-            >
-              M
-            </button>
-            <button
-              class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
-            >
-              L
-            </button>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+          {{ product.name }}
+        </h2>
+        <div class="flex items-center gap-2">
+          <div class="rating rating-sm gap-1">
+            <input
+              type="radio"
+              name="rating-6"
+              class="mask mask-star-2 bg-orange-400"
+            />
+            <input
+              type="radio"
+              name="rating-6"
+              class="mask mask-star-2 bg-orange-400"
+            />
+            <input
+              type="radio"
+              name="rating-6"
+              class="mask mask-star-2 bg-orange-400"
+            />
+            <input
+              type="radio"
+              name="rating-6"
+              class="mask mask-star-2 bg-orange-400"
+            />
+            <input
+              type="radio"
+              name="rating-6"
+              class="mask mask-star-2 bg-orange-400"
+              checked
+            />
           </div>
-        </div> -->
-        <div>
-          <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Product Description:</span
-          >
-          <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
-            {{ product.description }}
-          </p>
+          <span>(5.0)</span>
+          <span class="text-gray-50 underline">345 Reviews</span>
         </div>
-        <div class="my-2 text-lg">
-          <span class="font-bold text-gray-700 dark:text-gray-300"
-            >Price :
-          </span>
-          <span class="text-primary text-2xl"> ${{ product.price }}</span>
+        <p class="text-gray-600 dark:text-gray-300 text-lg">
+          {{ product.shortDescription }}
+        </p>
+        <div class="badge badge-secondary">
+          {{ product.category.name }}
         </div>
-        <div class="flex -mx-2 mt-6 justify-center">
-          <div class="w-3/6 px-2">
+
+        <span class="text-gray-50 text-4xl font-bold">
+          ${{ product.price }}</span
+        >
+        <div class="flex -mx-2 mt-6">
+          <div class="px-2">
             <button
               class="btn btn-outline rounded-xl w-full"
               (click)="addToCart(product)"
@@ -85,11 +75,233 @@
               Add to Cart
             </button>
           </div>
-          <div class="w-3/6 px-2">
-            <button class="btn btn-primary w-full">Purchase</button>
+          <div class="px-2">
+            <button class="btn btn-primary w-full">Add to Cart</button>
+          </div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="flex flex-wrap gap-10">
+          <div class="flex flex-col gap-2">
+            <span class="text-xl text-gray-50">Color</span>
+            <div class="space-x-2">
+              @for(color of product.colors.$values ;track color){
+              <div class="badge badge-neutral border badge-lg">
+                {{ color }}
+              </div>
+              }
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-xl text-gray-50">Size</span>
+            <div class="space-x-2">
+              @for(size of product.sizes.$values ;track size){
+              <div class="badge badge-neutral border badge-lg">
+                {{ size }}
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="my-4 p-4">
+        <span class="font-bold text-gray-700 dark:text-gray-300 text-2xl"
+          >Product Description:</span
+        >
+        <p class="text-gray-600 dark:text-gray-300 mt-2 text-lg">
+          {{ product.description }}
+        </p>
+      </div>
+      <div class="p-8">
+        <div class="text-center">
+          <div class="text-4xl font-bold">
+            Reviews <span class="text-yellow-400">(4.6)</span>
+          </div>
+          <div class="text-lg text-gray-400">645 Reviews</div>
+        </div>
+        <div class="flex mt-4 gap-4">
+          <div class="flex flex-col w-1/4 gap-4">
+            <div class="text-2xl font-bold">4.65 out of 5</div>
+            <button
+              class="btn btn-primary btn-sm w-36"
+              onclick="my_modal_1.showModal()"
+            >
+              Write a review
+            </button>
+          </div>
+
+          <div class="w-3/4">
+            <div class="flex items-center">
+              <span class="mr-2">5</span>
+              <div class="flex-grow">
+                <progress
+                  class="progress progress-primary w-full"
+                  value="239"
+                  max="645"
+                ></progress>
+              </div>
+              <span class="ml-4">239 reviews</span>
+            </div>
+            <div class="flex items-center mt-2">
+              <span class="mr-2">4</span>
+              <div class="flex-grow">
+                <progress
+                  class="progress progress-primary w-full"
+                  value="432"
+                  max="645"
+                ></progress>
+              </div>
+              <span class="ml-4">432 reviews</span>
+            </div>
+            <div class="flex items-center mt-2">
+              <span class="mr-2">3</span>
+              <div class="flex-grow">
+                <progress
+                  class="progress progress-primary w-full"
+                  value="53"
+                  max="645"
+                ></progress>
+              </div>
+              <span class="ml-4">53 reviews</span>
+            </div>
+            <div class="flex items-center mt-2">
+              <span class="mr-2">2</span>
+              <div class="flex-grow">
+                <progress
+                  class="progress progress-primary w-full"
+                  value="32"
+                  max="645"
+                ></progress>
+              </div>
+              <span class="ml-4">32 reviews</span>
+            </div>
+            <div class="flex items-center mt-2">
+              <span class="mr-2">1</span>
+              <div class="flex-grow">
+                <progress
+                  class="progress progress-primary w-full"
+                  value="13"
+                  max="645"
+                ></progress>
+              </div>
+              <span class="ml-4">13 reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6">
+          <div class="bg-base-200 p-4 rounded-lg mb-4">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <div class="text-lg font-bold">Jese Leos</div>
+
+                <div class="rating rating-xs">
+                  <input
+                    type="radio"
+                    name="rating-6"
+                    class="mask mask-star-2 bg-orange-400"
+                  />
+                  <input
+                    type="radio"
+                    name="rating-6"
+                    class="mask mask-star-2 bg-orange-400"
+                  />
+                  <input
+                    type="radio"
+                    name="rating-6"
+                    class="mask mask-star-2 bg-orange-400"
+                  />
+                  <input
+                    type="radio"
+                    name="rating-6"
+                    class="mask mask-star-2 bg-orange-400"
+                  />
+                  <input
+                    type="radio"
+                    name="rating-6"
+                    class="mask mask-star-2 bg-orange-400"
+                    checked
+                  />
+                </div>
+              </div>
+              <div class="text-sm text-gray-400">November 18 2023 at 15:35</div>
+            </div>
+            <div class="mt-2 text-gray-300">
+              It's fancy, amazing keyboard, matching accessories. Super fast,
+              batteries last more than usual, everything runs perfect in this
+              computer. Highly recommend!
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<dialog id="my_modal_1" class="modal">
+  <div method="dialog" class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <form>
+      <h3 class="font-bold text-lg">Add a review for:</h3>
+      <span class="line-clamp-1">{{ product.name }}</span>
+      <div class="divider"></div>
+      <div class="rating rating-md">
+        <input
+          type="radio"
+          name="rating"
+          class="mask mask-star-2 bg-orange-400"
+          value="1"
+        />
+        <input
+          type="radio"
+          name="rating"
+          class="mask mask-star-2 bg-orange-400"
+          value="2"
+        />
+        <input
+          type="radio"
+          name="rating"
+          class="mask mask-star-2 bg-orange-400"
+          value="3"
+        />
+        <input
+          type="radio"
+          name="rating"
+          class="mask mask-star-2 bg-orange-400"
+          value="4"
+        />
+        <input
+          type="radio"
+          name="rating"
+          class="mask mask-star-2 bg-orange-400"
+          value="5"
+        />
+      </div>
+      <div class="flex flex-col gap-2 mt-4">
+        <span>Review description </span>
+        <textarea
+          class="textarea textarea-bordered w-full"
+          placeholder="Write your review here..."
+          required
+        ></textarea>
+      </div>
+      <div class="form-control mt-4 max-w-max gap-2">
+        <label class="cursor-pointer label">
+          <input type="checkbox" class="checkbox checkbox-xs" required />
+          <span class="label-text ml-2"
+            >I agree to the terms and conditions</span
+          >
+        </label>
+      </div>
+      <div class="modal-action">
+        <button type="submit" class="btn btn-primary btn-sm">
+          Submit Review
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>

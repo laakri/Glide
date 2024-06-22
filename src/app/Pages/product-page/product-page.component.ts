@@ -46,11 +46,11 @@ export class ProductPageComponent implements OnInit {
     if (!this.product || this.product.stock === undefined) {
       return '';
     } else if (this.product.stock <= 0) {
-      return 'text-red-400';
+      return 'badge-error';
     } else if (this.product.stock <= 10) {
-      return 'text-yellow-400';
+      return 'badge-warning';
     } else {
-      return 'text-green-400';
+      return 'badge-success';
     }
   }
 }

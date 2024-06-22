@@ -13,7 +13,6 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   addProduct(productData: FormData): Observable<any> {
-    console.log(productData);
     return this.http.post<any>(this.apiUrl, productData).pipe(
       catchError((error) => {
         throw error;

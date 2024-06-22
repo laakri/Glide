@@ -45,6 +45,7 @@ export class ProductService {
       })
     );
   }
+
   updateProduct(productId: number, productData: FormData): Observable<any> {
     const updateUrl = `${this.apiUrl}/${productId}`;
     return this.http.put<any>(updateUrl, productData).pipe(
@@ -53,9 +54,19 @@ export class ProductService {
       })
     );
   }
+
   searchProducts(searchParams: string): Observable<Product[]> {
     const searchUrl = `${this.apiUrl}/search?${searchParams}`;
     return this.http.get<Product[]>(searchUrl).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  rateProduct(productId: number, rating: any): Observable<any> {
+    const rateUrl = `${this.apiUrl}/${productId}/rate`;
+    return this.http.post<any>(rateUrl, rating).pipe(
       catchError((error) => {
         throw error;
       })

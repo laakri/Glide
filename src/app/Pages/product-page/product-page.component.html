@@ -240,50 +240,35 @@
 </div>
 <dialog id="my_modal_1" class="modal">
   <div method="dialog" class="modal-box">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+    <form #reviewForm="ngForm" (ngSubmit)="rateProduct()">
+      <button
+        type="button"
+        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+      >
         ✕
       </button>
-    </form>
-    <form>
       <h3 class="font-bold text-lg">Add a review for:</h3>
       <span class="line-clamp-1">{{ product.name }}</span>
       <div class="divider"></div>
       <div class="rating rating-md">
-        <input
-          type="radio"
-          name="rating"
+        <label
+          *ngFor="let value of [1, 2, 3, 4, 5]"
           class="mask mask-star-2 bg-orange-400"
-          value="1"
-        />
-        <input
-          type="radio"
-          name="rating"
-          class="mask mask-star-2 bg-orange-400"
-          value="2"
-        />
-        <input
-          type="radio"
-          name="rating"
-          class="mask mask-star-2 bg-orange-400"
-          value="3"
-        />
-        <input
-          type="radio"
-          name="rating"
-          class="mask mask-star-2 bg-orange-400"
-          value="4"
-        />
-        <input
-          type="radio"
-          name="rating"
-          class="mask mask-star-2 bg-orange-400"
-          value="5"
-        />
+        >
+          <input
+            type="radio"
+            name="rating"
+            [(ngModel)]="ratingValue"
+            [value]="value"
+            required
+          />
+        </label>
       </div>
       <div class="flex flex-col gap-2 mt-4">
         <span>Review description </span>
         <textarea
+          name="reviewDescription"
+          [(ngModel)]="ratingDescription"
           class="textarea textarea-bordered w-full"
           placeholder="Write your review here..."
           required
@@ -298,7 +283,11 @@
         </label>
       </div>
       <div class="modal-action">
-        <button type="submit" class="btn btn-primary btn-sm">
+        <button
+          type="submit"
+          class="btn btn-primary btn-sm"
+          [disabled]="!reviewForm.valid"
+        >
           Submit Review
         </button>
       </div>

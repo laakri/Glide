@@ -14,6 +14,8 @@ import { CartService } from '../../Services/cart.service';
 export class ProductPageComponent implements OnInit {
   productId!: number;
   product!: Product;
+  ratingValue: number = 0;
+  ratingDescription: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -39,9 +41,11 @@ export class ProductPageComponent implements OnInit {
       }
     );
   }
+
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
+
   getStockClass(): string {
     if (!this.product || this.product.stock === undefined) {
       return '';
@@ -52,5 +56,25 @@ export class ProductPageComponent implements OnInit {
     } else {
       return 'badge-success';
     }
+  }
+
+  rateProduct() {
+    const rating: any = {
+      userId: '',
+      productId: this.productId,
+      Score: this.ratingValue,
+      Comment: this.ratingDescription,
+      createdAt: new Date(),
+    };
+
+    this.productService.rateProduct(this.productId, rating).subscribe(
+      (response) => {
+        console.log('Rating submitted:', response);
+        this.getProduct();
+      },
+      (error) => {
+        console.error('Error submitting rating:', error);
+      }
+    );
   }
 }

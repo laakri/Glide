@@ -63,6 +63,7 @@ export class MarketplaceComponent implements OnInit {
     this.productService.getProducts().subscribe((response: any) => {
       if (response && response.$values) {
         this.products = response.$values;
+        console.log(this.products);
       } else {
         this.products = response;
       }

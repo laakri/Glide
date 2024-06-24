@@ -1,4 +1,9 @@
-<div class="sticky top-0 bg-base-300 z-10">
+<nav class="bg-black flex justify-between items-center px-4 py-2 text-white">
+  <div class="text-sm text-gray">Free shipping & returns</div>
+  <div>BLACK FRIDAY IS COMING</div>
+  <div class="text-sm text-gray">Customer Service</div>
+</nav>
+<div class="sticky bg-base-100 backdrop-blur-lg top-0 z-10">
   <nav>
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -6,11 +11,11 @@
           href="#"
           class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex gap-2 items-center"
         >
-          <img class="h-6 w-auto" src="../../../assets/X-line.png" />
-          <span class="text-2xl">Glide</span>
+          <!-- <img class="h-6 w-auto" src="../../../assets/dark-X-line.png" /> -->
+          <span class="text-2xl">GLIDE</span>
         </a>
         <label
-          class="input input-bordered rounded-lg flex items-center gap-2 w-[33rem] input-sm mx-6"
+          class="input input-bordered rounded-lg flex items-center gap-2 w-full input-sm mx-6"
         >
           <input type="text" class="grow" placeholder="Search" />
           <svg
@@ -263,15 +268,25 @@
     <div class="flex items-center">
       <div class="hidden lg:block">
         <div class="ml-10 flex items-baseline space-x-4">
+          <button [routerLink]="['/']" class="btn btn-sm btn-ghost">
+            Home
+          </button>
           <button [routerLink]="['/marketplace']" class="btn btn-sm btn-ghost">
-            MarketPlace
+            Shop
+          </button>
+          <button [routerLink]="['/']" class="btn btn-sm btn-ghost">
+            Hot Deals
           </button>
           <button [routerLink]="['/']" class="btn btn-sm btn-ghost">
             About
           </button>
           <button [routerLink]="['/']" class="btn btn-sm btn-ghost">
-            Services
+            Contact
           </button>
+          <button [routerLink]="['/']" class="btn btn-sm btn-ghost">
+            Blog
+          </button>
+
           @if(isLoggedIn){
           <button [routerLink]="['/dashboard']" class="btn btn-sm btn-ghost">
             Dashboard

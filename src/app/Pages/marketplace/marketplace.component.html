@@ -72,6 +72,26 @@
     </div>
   </div>
   <div class="w-full p-2 flex flex-col gap-3">
+    <!-- <div
+      class="bg-blue-100 flex items-center gap-2 text-blue-500 p-4 rounded-lg"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="h-6 w-6"
+      >
+        <path
+          d="M20.748 4H3.252A2.253 2.253 0 001 6.252v11.496A2.253 2.253 0 003.252 20h17.496A2.253 2.253 0 0023 17.748V6.252A2.253 2.253 0 0020.748 4zM3.252 5h17.496c.692 0 1.252.56 1.252 1.252v1.556H2v-1.556C2 5.56 2.56 5 3.252 5zm0 14a1.252 1.252 0 01-1.252-1.252V8.808h19.496v8.94c0 .692-.56 1.252-1.252 1.252H3.252z"
+        />
+        <path d="M15 12.5a1.5 1.5 0 000-3 1.5 1.5 0 000 3z" />
+      </svg>
+
+      <span
+        >You have up to $2000 budget available and you can pay up to 12
+        installments with FlowWallet see how it works.</span
+      >
+    </div> -->
     <div class="w-full">
       <input
         type="text"
@@ -81,6 +101,7 @@
         (input)="onSearchTermChange()"
       />
     </div>
+
     <div class="flex flex-wrap gap-4">
       @if(loading){
       <div class="skeleton w-[18.5rem] h-[22rem]"></div>
@@ -121,46 +142,42 @@
             <div>
               <a
                 [routerLink]="['/product', product.id]"
-                class="text-accent hover:underline"
+                class="hover:underline"
               >
                 <h2 class="card-title line-clamp-2 h-16">
                   {{ product.name }}
                 </h2>
               </a>
 
-              <p class="line-clamp-2">
+              <div class="flex items-center gap-2">
+                <div class="rating rating-sm">
+                  @for(something of [1,2,3,4,5] ;track something){
+                  <ng-container>
+                    <input
+                      type="radio"
+                      name="rating-6"
+                      class="mask mask-star-2 bg-orange-500"
+                      [checked]="something < 5"
+                    /> </ng-container
+                  >}
+                </div>
+                <span>(30)</span>
+                <span class="underline">20 Reviews</span>
+              </div>
+              <p class="line-clamp-1 text-gray">
                 {{ product.shortDescription }}
               </p>
             </div>
-            <div class="text-2xl flex items-end max-h-6 mt-4 ml-1 gap-1">
-              {{ product.price }}
-              <p class="text-sm text-accent">Dt</p>
-            </div>
           </div>
           <div class="card-actions w-full flex justify-center items-center">
-            <button
-              class="btn btn-sm text-accent border-1 border-accent flex-grow"
+            <div
+              class="text-xl flex items-end max-h-6 gap-1 font-bold flex-grow"
             >
-              Buy Now
-            </button>
-            <button
-              class="btn btn-sm text-secondary border-1 border-secondary flex-none"
-              (click)="addToCart(product)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
+              {{ product.price }}
+              <p class="text-sm">Dt</p>
+            </div>
+            <button class="btn btn-sm btn-primary" (click)="addToCart(product)">
+              Add to cart
             </button>
           </div>
         </div>

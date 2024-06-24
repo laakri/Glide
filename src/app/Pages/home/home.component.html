@@ -4,17 +4,27 @@
     <div
       class="hero min-h-[20rem]"
       style="
-        background-image: url(https://i.gyazo.com/b928bef1bb59be0564a15a8266d98264.png);
+        background-image: url(../../../assets/fast-fashion-concept-with-woman-shopping_23-2150871375.jpg);
       "
     >
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-white">
-        <div class="max-w-md">
-          <h1 class="mb-5 text-5xl font-bold">Welcome to Glide!</h1>
-          <p class="mb-5">
-            Discover the latest trends and deals in fashion, electronics, home
-            goods, and more at Glide. We offer a wide range of products.
-          </p>
+      <div class="hero-overlay bg-opacity-50"></div>
+      <div class="hero-content text-center text-white h-full">
+        <div class="w-full h-full">
+          <div class="flex justify-between">
+            <div class="flex flex-col items-start p-2 text-xl">
+              <h1>LATEST TRENDS IN FASHION</h1>
+              <h1>E-COMMERCE SHOP</h1>
+            </div>
+            <div class="flex flex-col items-end p-2 text-md">
+              <h1 class="text-gray text-lg">LAAKRI</h1>
+            </div>
+          </div>
+          <h1
+            class="mb-5 text-[5rem] sm:text-[10rem] md:text-[15rem] lg:text-[20rem] font-bold"
+          >
+            GLIDE
+          </h1>
+
           <button class="btn">Shop Now</button>
         </div>
       </div>
@@ -26,89 +36,51 @@
       <a href="#slide2" class="btn btn-circle">❯</a>
     </div>
   </div>
-
-  <!-- Carousel Item 2 -->
-  <div id="slide2" class="carousel-item relative w-full">
-    <div
-      class="hero min-h-[20rem]"
-      style="background-image: url(https://example.com/image2.jpg)"
-    >
-      <!-- Your hero content for slide 2 -->
-    </div>
-    <div
-      class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
-    >
-      <a href="#slide1" class="btn btn-circle">❮</a>
-      <a href="#slide3" class="btn btn-circle">❯</a>
-    </div>
-  </div>
-
-  <!-- Add more carousel items as needed -->
 </div>
 <div class="min-h-screen">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Products section -->
     <section class="py-16">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Featured Products</h2>
+        <h2 class="text-5xl font-bold mb-8">Featured Products</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <figure>
+          @for(product of ProductFakeList ;track product){
+
+          <div
+            class="w-96 h-[25rem] bg-base-100 shadow-md rounded-lg overflow-hidden"
+          >
+            <div class="h-5/6">
               <img
-                src="https://i.gyazo.com/a53a5f06d81b6361b7023c9fc61ca3ca.png"
+                class="object-cover h-full w-full"
+                src="{{ product }}"
                 alt="Shoes"
               />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">
-                Shoes!
-                <div class="badge badge-secondary">NEW</div>
-              </h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div>
-                <div class="badge badge-outline">Products</div>
-              </div>
+            </div>
+            <div
+              class="card-actions h-1/6 flex items-center justify-between px-4 py-2 bg-gray-100"
+            >
+              <span class="text-lg font-semibold">Discover More</span>
+              <button
+                class="btn btn-circle btn-sm btn-primary flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <figure>
-              <img
-                src="https://i.gyazo.com/61e4242c11d0ed191e777d4a6356dc4c.png"
-                alt="Shoes"
-              />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">
-                Shoes!
-                <div class="badge badge-secondary">NEW</div>
-              </h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div>
-                <div class="badge badge-outline">Products</div>
-              </div>
-            </div>
-          </div>
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <figure>
-              <img
-                src="https://i.gyazo.com/e6220faac95c162ebda5cb1ee3bc19ed.png"
-                alt="Shoes"
-              />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">
-                Shoes!
-                <div class="badge badge-secondary">NEW</div>
-              </h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div>
-                <div class="badge badge-outline">Products</div>
-              </div>
-            </div>
-          </div>
+          }
         </div>
       </div>
     </section>
@@ -116,39 +88,40 @@
     <!-- Categories section -->
     <section class="py-4">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Our Categories</h2>
+        <h2 class="text-5xl font-bold mb-8">Categories</h2>
+
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div class="p-6 rounded-lg shadow-md border-2 border-purple-400">
+          <div class="p-6 border">
             <div class="flex items-center mb-4">
-              <h3 class="text-xl font-bold mb-4 text-purple-400">Fashion</h3>
+              <h3 class="text-xl font-bold mb-2">Fashion</h3>
             </div>
-            <p>
+            <p class="text-gray-600">
               Explore our collection of trendy clothing for men, women, and
               kids.
             </p>
           </div>
-          <div class="p-6 rounded-lg shadow-md border-2 border-pink-400">
+          <div class="p-6 border">
             <div class="flex items-center mb-4">
-              <h3 class="text-xl font-bold mb-4 text-pink-400">Electronics</h3>
+              <h3 class="text-xl font-bold mb-2">Electronics</h3>
             </div>
-            <p>
+            <p class="text-gray-600">
               Browse through our selection of the latest gadgets and
               electronics.
             </p>
           </div>
-          <div class="p-6 rounded-lg shadow-md border border-cyan-400">
+          <div class="p-6 border">
             <div class="flex items-center mb-4">
-              <h3 class="text-xl font-bold mb-4 text-cyan-400">Home Goods</h3>
+              <h3 class="text-xl font-bold mb-2">Home Goods</h3>
             </div>
-            <p>Discover stylish and functional home decor and furnishings.</p>
+            <p class="text-gray-600">
+              Discover stylish and functional home decor and furnishings.
+            </p>
           </div>
-          <div class="p-6 rounded-lg shadow-md border border-blue-400">
+          <div class="p-6 border">
             <div class="flex items-center mb-4">
-              <h3 class="text-xl font-bold mb-4 text-blue-400">
-                Sports & Outdoors
-              </h3>
+              <h3 class="text-xl font-bold mb-2">Sports & Outdoors</h3>
             </div>
-            <p>
+            <p class="text-gray-600">
               Gear up for your next adventure with our selection of sports and
               outdoor equipment.
             </p>

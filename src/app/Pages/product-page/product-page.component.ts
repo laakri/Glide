@@ -17,8 +17,11 @@ export class ProductPageComponent implements OnInit {
   productId!: number;
   product!: Product;
   ratingValue: number = 5;
+  submittedRatingValue: number = 5;
   ratingDescription: string = '';
-
+  reviewSummary: { score: number; count: number }[] = [];
+  averageRating: number = 0;
+  totalReviews: number = 0;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -30,6 +33,7 @@ export class ProductPageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.productId = params['productId'];
       this.getProduct();
+      this.calculateReviewSummary();
     });
   }
 
@@ -45,6 +49,25 @@ export class ProductPageComponent implements OnInit {
     );
   }
 
+  calculateReviewSummary(): void {
+    const ratingCounts: { [key: number]: number } = {};
+    this.totalReviews = this.product.ratings.$values.length;
+
+    this.product.ratings.$values.forEach((rating: any) => {
+      ratingCounts[rating.score] = (ratingCounts[rating.score] || 0) + 1;
+    });
+
+    this.reviewSummary = [1, 2, 3, 4, 5].map((score) => ({
+      score,
+      count: ratingCounts[score] || 0,
+    }));
+
+    const totalScore = this.product.ratings.$values.reduce(
+      (sum: any, rating: any) => sum + rating.score,
+      0
+    );
+    this.averageRating = totalScore / this.totalReviews;
+  }
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
@@ -63,18 +86,23 @@ export class ProductPageComponent implements OnInit {
 
   rateProduct() {
     const rating: any = {
-      Score: this.ratingValue,
+      Score: this.submittedRatingValue,
       Comment: this.ratingDescription,
     };
     console.log(rating);
     this.productService.rateProduct(this.productId, rating).subscribe(
       (response) => {
         this.toastService.showToast('Rating submitted', 'success');
+        this.calculateReviewSummary();
         this.getProduct();
       },
       (error) => {
         this.toastService.showToast('Error submitting rating', 'error');
       }
     );
+  }
+
+  range(count: number): number[] {
+    return Array.from({ length: count }, (_, i) => i);
   }
 }

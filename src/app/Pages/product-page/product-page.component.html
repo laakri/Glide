@@ -21,69 +21,44 @@
           }@else if(product.stock > 10){
           <span> In Stock ({{ product.stock }} left) </span> }
         </div>
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+        <h2 class="text-2xl font-bold mb-2">
           {{ product.name }}
         </h2>
         <div class="flex items-center gap-2">
           <div class="rating rating-sm gap-1">
-            <input
-              type="radio"
-              name="rating-6"
-              class="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-6"
-              class="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-6"
-              class="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-6"
-              class="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-6"
-              class="mask mask-star-2 bg-orange-400"
-              checked
-            />
+            @for(something of range(5) ;track something){
+            <ng-container>
+              <input
+                type="radio"
+                name="rating-6"
+                class="mask mask-star-2 bg-orange-400"
+                [checked]="something < averageRating"
+              /> </ng-container
+            >}
           </div>
-          <span>(5.0)</span>
-          <span class="text-gray-50 underline">345 Reviews</span>
+          <span>({{ averageRating.toFixed(1) }})</span>
+          <span class="underline">{{ totalReviews }} Reviews</span>
         </div>
-        <p class="text-gray-600 dark:text-gray-300 text-lg">
+        <p class="text-lg">
           {{ product.shortDescription }}
         </p>
         <div class="badge badge-secondary">
           {{ product.category.name }}
         </div>
 
-        <span class="text-gray-50 text-4xl font-bold">
-          ${{ product.price }}</span
-        >
+        <span class="text-4xl font-bold"> ${{ product.price }}</span>
         <div class="flex -mx-2 mt-6">
           <div class="px-2">
-            <button
-              class="btn btn-outline rounded-xl w-full"
-              (click)="addToCart(product)"
-            >
+            <button class="btn btn-primary w-full" (click)="addToCart(product)">
               Add to Cart
             </button>
-          </div>
-          <div class="px-2">
-            <button class="btn btn-primary w-full">Add to Cart</button>
           </div>
         </div>
         <div class="divider"></div>
 
         <div class="flex flex-wrap gap-10">
           <div class="flex flex-col gap-2">
-            <span class="text-xl text-gray-50">Color</span>
+            <span class="text-xl">Color</span>
             <div class="space-x-2">
               @for(color of product.colors.$values ;track color){
               <div class="badge badge-neutral border badge-lg">
@@ -93,7 +68,7 @@
             </div>
           </div>
           <div class="flex flex-col gap-2">
-            <span class="text-xl text-gray-50">Size</span>
+            <span class="text-xl">Size</span>
             <div class="space-x-2">
               @for(size of product.sizes.$values ;track size){
               <div class="badge badge-neutral border badge-lg">
@@ -107,23 +82,28 @@
     </div>
     <div>
       <div class="my-4 p-4">
-        <span class="font-bold text-gray-700 dark:text-gray-300 text-2xl"
+        <span class="font-bold text-gray-700 text-2xl"
           >Product Description:</span
         >
-        <p class="text-gray-600 dark:text-gray-300 mt-2 text-lg">
+        <p class="mt-2 text-lg">
           {{ product.description }}
         </p>
       </div>
       <div class="p-8">
         <div class="text-center">
           <div class="text-4xl font-bold">
-            Reviews <span class="text-yellow-400">(4.6)</span>
+            Reviews
+            <span class="text-yellow-400"
+              >({{ averageRating.toFixed(1) }})</span
+            >
           </div>
-          <div class="text-lg text-gray-400">645 Reviews</div>
+          <div class="text-lg">{{ totalReviews }} Reviews</div>
         </div>
         <div class="flex mt-4 gap-4">
           <div class="flex flex-col w-1/4 gap-4">
-            <div class="text-2xl font-bold">4.65 out of 5</div>
+            <div class="text-2xl font-bold">
+              {{ averageRating.toFixed(2) }} out of 5
+            </div>
             <button
               class="btn btn-primary btn-sm w-36"
               onclick="my_modal_1.showModal()"
@@ -133,64 +113,26 @@
           </div>
 
           <div class="w-3/4">
-            <div class="flex items-center">
-              <span class="mr-2">5</span>
-              <div class="flex-grow">
-                <progress
-                  class="progress progress-primary w-full"
-                  value="239"
-                  max="645"
-                ></progress>
+            @for(review of reviewSummary;track review){
+            <ng-container>
+              <div class="flex items-center mt-2">
+                <span class="mr-2">{{ review.score }}</span>
+                <div class="flex-grow">
+                  <progress
+                    class="progress progress-primary w-full"
+                    [value]="review.count"
+                    [max]="totalReviews"
+                  ></progress>
+                </div>
+                <span class="ml-4">{{ review.count }} reviews</span>
               </div>
-              <span class="ml-4">239 reviews</span>
-            </div>
-            <div class="flex items-center mt-2">
-              <span class="mr-2">4</span>
-              <div class="flex-grow">
-                <progress
-                  class="progress progress-primary w-full"
-                  value="432"
-                  max="645"
-                ></progress>
-              </div>
-              <span class="ml-4">432 reviews</span>
-            </div>
-            <div class="flex items-center mt-2">
-              <span class="mr-2">3</span>
-              <div class="flex-grow">
-                <progress
-                  class="progress progress-primary w-full"
-                  value="53"
-                  max="645"
-                ></progress>
-              </div>
-              <span class="ml-4">53 reviews</span>
-            </div>
-            <div class="flex items-center mt-2">
-              <span class="mr-2">2</span>
-              <div class="flex-grow">
-                <progress
-                  class="progress progress-primary w-full"
-                  value="32"
-                  max="645"
-                ></progress>
-              </div>
-              <span class="ml-4">32 reviews</span>
-            </div>
-            <div class="flex items-center mt-2">
-              <span class="mr-2">1</span>
-              <div class="flex-grow">
-                <progress
-                  class="progress progress-primary w-full"
-                  value="13"
-                  max="645"
-                ></progress>
-              </div>
-              <span class="ml-4">13 reviews</span>
-            </div>
+            </ng-container>
+            }
           </div>
         </div>
         <div class="mt-6">
+          <h3 class="text-2xl font-bold mb-2">Customer Reviews</h3>
+
           @if(product.ratings.$values){ @for(comment of product.ratings.$values
           ;track comment){
           <div class="bg-base-200 p-4 rounded-lg mb-4">
@@ -199,18 +141,18 @@
                 <div class="text-lg font-bold">{{ comment.user.username }}</div>
 
                 <div class="rating rating-xs">
-                  @if(comment.score){ @for(rate of comment.score ;track rate ){
+                  @for(rate of range(comment.score) ;track rate ){
                   <input
                     type="radio"
                     name="rating-6"
                     class="mask mask-star-2 bg-orange-400"
                   />
-                  }}
+                  }
                 </div>
               </div>
-              <div class="text-sm text-gray-400">{{ comment.createdAt }}</div>
+              <div class="text-sm">{{ comment.createdAt }}</div>
             </div>
-            <div class="mt-2 text-gray-300">
+            <div class="mt-2">
               {{ comment.comment }}
             </div>
           </div>
@@ -232,18 +174,17 @@
       <span class="line-clamp-1">{{ product.name }}</span>
       <div class="divider"></div>
       <div class="rating rating-md">
-        <label
-          *ngFor="let value of [1, 2, 3, 4, 5]"
-          class="mask mask-star-2 bg-orange-400"
-        >
+        @for(something of range(5);track something){
+        <ng-container>
           <input
             type="radio"
-            name="rating"
-            [(ngModel)]="ratingValue"
-            [value]="value"
-            required
+            name="rating-6"
+            ngModel="submittedRatingValue"
+            class="mask mask-star-2 bg-orange-400"
+            [checked]="something < averageRating"
           />
-        </label>
+        </ng-container>
+        }
       </div>
       <div class="flex flex-col gap-2 mt-4">
         <span>Review description </span>

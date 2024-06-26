@@ -22,10 +22,14 @@ import { ListProductComponent } from './BackOfficePages/AdminSection/list-produc
 import { ListOrderComponent } from './BackOfficePages/AdminSection/list-order/list-order.component';
 import { DeliveryOrdersComponent } from './BackOfficePages/DeliverySection/delivery-orders/delivery-orders.component';
 import { ReportListComponent } from './BackOfficePages/AdminSection/report-list/report-list.component';
+import { BlogComponent } from './Pages/blog/blog.component';
+import { AboutComponent } from './Pages/about/about.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'marketplace', component: MarketplaceComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'cart', component: CartComponent },
   { path: 'order', component: OrderComponent },
   { path: 'product/:productId', component: ProductPageComponent },

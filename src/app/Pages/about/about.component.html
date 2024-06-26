@@ -1,0 +1,290 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Hero Section -->
+  <section class="hero bg-base-200 rounded-box mb-16">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold mb-4">About Glide</h1>
+        <p class="text-lg mb-6">
+          Revolutionizing online shopping with style, technology, and
+          sustainability.
+        </p>
+        <button class="btn btn-primary">Our Story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Our Story
+    </h2>
+    <div class="flex flex-col md:flex-row gap-8 items-center">
+      <div class="md:w-1/2">
+        <p class="text-lg mb-4">
+          Glide was born out of a simple idea: to make online shopping as
+          enjoyable and personalized as visiting your favorite boutique. Founded
+          in 2020 by Emma Johnson, we've grown from a small startup to a global
+          e-commerce platform that serves millions of customers worldwide.
+        </p>
+        <p class="text-lg mb-4">
+          Our journey has been driven by a passion for innovation, a commitment
+          to sustainability, and an unwavering focus on our customers. We
+          believe that shopping should be more than just a transaction – it
+          should be an experience that delights and inspires.
+        </p>
+        <p class="text-lg">
+          Today, Glide is at the forefront of e-commerce technology, offering a
+          seamless shopping experience across web and mobile platforms. We're
+          not just selling products; we're curating lifestyles, supporting
+          sustainable brands, and building a community of savvy, conscious
+          consumers.
+        </p>
+      </div>
+      <div class="md:w-1/2">
+        <img
+          src="https://i.gyazo.com/0f7aa2af9864f032e78383415a794b23.jpg"
+          alt="Glide Office"
+          class="rounded-lg shadow-2xl"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Mission -->
+  <section class="mb-16 bg-base-200 p-8 rounded-box">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Our Mission
+    </h2>
+    <p class="text-xl italic text-center">
+      "To empower consumers with a seamless, personalized shopping experience
+      while promoting sustainable and ethical choices."
+    </p>
+  </section>
+
+  <!-- Our Team -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Meet Our Team
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div
+        *ngFor="let member of teamMembers"
+        class="card bg-base-100 shadow-xl"
+      >
+        <figure>
+          <img
+            [src]="member.imageUrl"
+            [alt]="member.name"
+            class="w-full h-64 object-cover"
+          />
+        </figure>
+        <div class="card-body">
+          <h3 class="card-title">{{ member.name }}</h3>
+          <p class="text-sm text-base-content/70">{{ member.position }}</p>
+          <p class="mt-2">{{ member.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Our Values
+    </h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <div
+        *ngFor="let value of values"
+        class="badge badge-lg badge-primary p-4 text-lg"
+      >
+        {{ value }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Milestones -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Our Journey
+    </h2>
+    <ul class="timeline timeline-vertical">
+      <li *ngFor="let milestone of milestones; let isLast = last">
+        <div class="timeline-start">{{ milestone.year }}</div>
+        <div class="timeline-middle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="timeline-end timeline-box">{{ milestone.achievement }}</div>
+        <hr *ngIf="!isLast" />
+      </li>
+    </ul>
+  </section>
+
+  <!-- Join Us -->
+  <section class="mb-16 bg-base-200 p-8 rounded-box text-center">
+    <h2 class="text-3xl font-semibold mb-6">Join the Glide Revolution</h2>
+    <p class="text-lg mb-6">
+      Be part of our journey to transform online shopping. Join our community of
+      fashion-forward, tech-savvy, and environmentally conscious shoppers.
+    </p>
+    <button class="btn btn-primary btn-lg">Shop Now</button>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      What Our Customers Say
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <p class="italic">
+            "Glide has completely changed how I shop online. The personalized
+            recommendations are spot-on, and I love supporting sustainable
+            brands!"
+          </p>
+          <p class="text-right font-semibold mt-4">- Sarah T.</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <p class="italic">
+            "The Glide app is a game-changer. It's like having a personal
+            stylist in my pocket. Plus, their customer service is top-notch!"
+          </p>
+          <p class="text-right font-semibold mt-4">- Michael R.</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <p class="italic">
+            "I appreciate how Glide makes it easy to shop ethically. Their
+            commitment to sustainability aligns perfectly with my values."
+          </p>
+          <p class="text-right font-semibold mt-4">- Aisha K.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold mb-6 border-l-4 border-primary pl-4">
+      Get in Touch
+    </h2>
+    <div class="flex flex-col md:flex-row gap-8">
+      <div class="md:w-1/2">
+        <p class="text-lg mb-4">
+          We'd love to hear from you! Whether you have a question about our
+          products, need help with an order, or just want to say hello, our team
+          is here for you.
+        </p>
+        <ul class="space-y-2">
+          <li class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+              />
+            </svg>
+            supportglideglide.com
+          </li>
+          <li class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+            1-800-GLIDE-SHOP
+          </li>
+          <li class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+              />
+            </svg>
+            123 Fashion Street, Tech City, ST 12345
+          </li>
+        </ul>
+      </div>
+      <div class="md:w-1/2">
+        <form class="space-y-4">
+          <div class="form-control">
+            <label class="label" for="name">
+              <span class="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Your Name"
+              class="input input-bordered w-full"
+            />
+          </div>
+          <div class="form-control">
+            <label class="label" for="email">
+              <span class="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Your Email"
+              class="input input-bordered w-full"
+            />
+          </div>
+          <div class="form-control">
+            <label class="label" for="message">
+              <span class="label-text">Message</span>
+            </label>
+            <textarea
+              id="message"
+              class="textarea textarea-bordered h-24"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

@@ -5,6 +5,7 @@ import { AuthService } from '../../Auth/AuthServices/auth.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { SseService } from '../../Services/notification.service';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../Services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,12 +24,14 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   userData: any;
   unreadNotifications: number = 0;
-
+  forest = false;
+  theme = '';
   constructor(
     private cartService: CartService,
     private authService: AuthService,
     private sseService: SseService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +45,28 @@ export class NavbarComponent implements OnInit {
         this.fetchNotifications();
       }
     });
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      if (theme == 'forest') {
+        this.forest = true;
+      } else {
+        this.forest = false;
+      }
+    }
   }
 
+  changeTheme(): void {
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      if (theme == 'forest') {
+        this.forest = false;
+        this.themeService.saveTheme('lofi');
+      } else {
+        this.forest = true;
+        this.themeService.saveTheme('forest');
+      }
+    }
+  }
   logout(): void {
     this.authService.logoutUser();
   }

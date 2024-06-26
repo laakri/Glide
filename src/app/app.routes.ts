@@ -24,12 +24,14 @@ import { DeliveryOrdersComponent } from './BackOfficePages/DeliverySection/deliv
 import { ReportListComponent } from './BackOfficePages/AdminSection/report-list/report-list.component';
 import { BlogComponent } from './Pages/blog/blog.component';
 import { AboutComponent } from './Pages/about/about.component';
+import { ContactComponent } from './Pages/contact/contact.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'marketplace', component: MarketplaceComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
   { path: 'order', component: OrderComponent },
   { path: 'product/:productId', component: ProductPageComponent },

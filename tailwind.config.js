@@ -12,7 +12,7 @@ module.exports = {
           ...require("daisyui/src/theming/themes")["lofi"],
           primary: "#0F1035",
           secondary: "#365486",
-          accent: "#7FC7D9",
+          accent: "#156173",
         },
       },
 

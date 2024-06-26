@@ -33,7 +33,6 @@ export class ProductPageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.productId = params['productId'];
       this.getProduct();
-      this.calculateReviewSummary();
     });
   }
 
@@ -41,7 +40,7 @@ export class ProductPageComponent implements OnInit {
     this.productService.getProductById(this.productId).subscribe(
       (product: Product) => {
         this.product = product;
-        console.log(this.product);
+        this.calculateReviewSummary();
       },
       (error) => {
         console.error(error);
@@ -89,11 +88,9 @@ export class ProductPageComponent implements OnInit {
       Score: this.submittedRatingValue,
       Comment: this.ratingDescription,
     };
-    console.log(rating);
     this.productService.rateProduct(this.productId, rating).subscribe(
       (response) => {
         this.toastService.showToast('Rating submitted', 'success');
-        this.calculateReviewSummary();
         this.getProduct();
       },
       (error) => {

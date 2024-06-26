@@ -39,9 +39,9 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = loggedIn;
       if (loggedIn) {
         this.userData = this.authService.getUserData();
+        this.fetchNotifications();
       }
     });
-    this.fetchNotifications();
   }
 
   logout(): void {

@@ -1,7 +1,8 @@
-<div class="mx-auto py-8 px-4 sm:px-6 lg:px-8 flex gap-2">
+<div class="mx-auto py-4 px-4 sm:px-6 lg:px-8 flex gap-2">
   <div class="flex flex-col items-center">
-    <div class="menu bg-base-200 w-64 rounded-box p-4 sticky top-20">
-      <h2 class="menu-title dark:text-accent text-lg">Filters</h2>
+    @if(filter == true){
+    <div class="menu bg-base-200 w-64 rounded-box px-4 py-2 sticky top-32">
+      <h2 class="menu-title dark:text-accent text-lg">Filter</h2>
       <ul>
         <li>
           <h3 class="menu-title">Categories</h3>
@@ -70,10 +71,11 @@
         </li>
       </ul>
     </div>
+    }
   </div>
   <div class="w-full p-2 flex flex-col gap-3">
     <!-- <div
-      class="bg-blue-100 flex items-center gap-2 text-blue-500 p-4 rounded-lg"
+      class="bg-gray-100 flex items-center gap-2 text-gray-500 p-4 rounded-lg"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -92,14 +94,66 @@
         installments with FlowWallet see how it works.</span
       >
     </div> -->
-    <div class="w-full">
+    <div class="breadcrumbs font-bold text-sm">
+      <ul>
+        @for (crumb of breadcrumbs; track crumb; let last = $last) { @if (last)
+        {
+        <li>{{ crumb.label }}</li>
+        } @else {
+        <li>
+          <a [routerLink]="crumb.url">{{ crumb.label }}</a>
+        </li>
+        } }
+      </ul>
+    </div>
+    <div class="w-full flex gap-2">
+      <button
+        class="btn btn-sm flex items-center gap-2"
+        (click)="filterSwitch()"
+      >
+        @if (filter) {
+        <span>Filter</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+        } @else {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+          />
+        </svg>
+        }
+      </button>
+
       <input
         type="text"
         placeholder="Search..."
-        class="input input-bordered w-full"
+        class="input input-sm input-bordered w-full"
         [(ngModel)]="searchTerm"
-        (input)="onSearchTermChange()"
       />
+      <button class="btn btn-primary btn-sm" (click)="onSearchTermChange()">
+        Search
+      </button>
     </div>
 
     <div class="flex flex-wrap gap-4">
@@ -184,5 +238,28 @@
       </div>
       }}}
     </div>
+    @if(totalItems > 0) {
+    <div class="flex justify-center mt-4">
+      <div class="join">
+        <button
+          class="join-item btn"
+          [disabled]="currentPage === 1"
+          (click)="previousPage()"
+        >
+          «
+        </button>
+        <button class="join-item btn">
+          Page {{ currentPage }} of {{ totalPages }}
+        </button>
+        <button
+          class="join-item btn"
+          [disabled]="currentPage === totalPages"
+          (click)="nextPage()"
+        >
+          »
+        </button>
+      </div>
+    </div>
+    }
   </div>
 </div>

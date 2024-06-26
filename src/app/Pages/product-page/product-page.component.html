@@ -82,9 +82,7 @@
     </div>
     <div>
       <div class="my-4 p-4">
-        <span class="font-bold text-gray-700 text-2xl"
-          >Product Description:</span
-        >
+        <span class="font-bold text-2xl">Product Description:</span>
         <p class="mt-2 text-lg">
           {{ product.description }}
         </p>
@@ -105,7 +103,7 @@
               {{ averageRating.toFixed(2) }} out of 5
             </div>
             <button
-              class="btn btn-primary btn-sm w-36"
+              class="btn btn-primary w-36"
               onclick="my_modal_1.showModal()"
             >
               Write a review
@@ -133,13 +131,12 @@
         <div class="mt-6">
           <h3 class="text-2xl font-bold mb-2">Customer Reviews</h3>
 
-          @if(product.ratings.$values){ @for(comment of product.ratings.$values
-          ;track comment){
+          @if(product.ratings.$values && product.ratings.$values.length > 0) {
+          @for(comment of product.ratings.$values ;track comment){
           <div class="bg-base-200 p-4 rounded-lg mb-4">
             <div class="flex flex-col">
               <div class="flex items-center gap-2">
                 <div class="text-lg font-bold">{{ comment.user.username }}</div>
-
                 <div class="rating rating-xs">
                   @for(rate of range(comment.score) ;track rate ){
                   <input
@@ -155,8 +152,49 @@
             <div class="mt-2">
               {{ comment.comment }}
             </div>
+            @if(userData && userData.userId == comment.user.id ){
+            <button
+              class="btn btn-xs btn-secondary mx-2 my-2"
+              (click)="editRating(comment)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-xs btn-error"
+              (click)="deleteRating(comment)"
+            >
+              Delete
+            </button>
+            }
           </div>
-          }}
+          }} @else {
+          <div class="p-8 rounded-lg text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-12 w-12 mx-auto mb-4 text-gray"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              />
+            </svg>
+            <h3 class="text-lg font-semibold mb-2">No Reviews Yet</h3>
+            <p class="text-gray">
+              Be the first to share your thoughts about this product!
+            </p>
+            <button
+              class="btn btn-primary mt-4"
+              onclick="my_modal_1.showModal()"
+            >
+              Write a Review
+            </button>
+          </div>
+          }
         </div>
       </div>
     </div>
@@ -165,25 +203,29 @@
 <dialog id="my_modal_1" class="modal">
   <div method="dialog" class="modal-box">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+      <button
+        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        (click)="resetRatingForm()"
+      >
         ✕
       </button>
     </form>
     <form #reviewForm="ngForm" (ngSubmit)="rateProduct()">
-      <h3 class="font-bold text-lg">Add a review for:</h3>
+      <h3 class="font-bold text-lg">
+        {{ editingRating ? "Edit" : "Add" }} a review for:
+      </h3>
       <span class="line-clamp-1">{{ product.name }}</span>
       <div class="divider"></div>
       <div class="rating rating-md">
-        @for(something of range(5);track something){
-        <ng-container>
-          <input
-            type="radio"
-            name="rating-6"
-            ngModel="submittedRatingValue"
-            class="mask mask-star-2 bg-orange-400"
-            [checked]="something < averageRating"
-          />
-        </ng-container>
+        @for(star of range(5); track star) {
+        <input
+          type="radio"
+          name="rating-6"
+          class="mask mask-star-2 bg-orange-400"
+          [value]="star + 1"
+          [(ngModel)]="submittedRatingValue"
+          required
+        />
         }
       </div>
       <div class="flex flex-col gap-2 mt-4">
@@ -210,7 +252,7 @@
           class="btn btn-primary btn-sm"
           [disabled]="!reviewForm.valid"
         >
-          Submit Review
+          {{ editingRating ? "Update" : "Submit" }} Review
         </button>
       </div>
     </form>

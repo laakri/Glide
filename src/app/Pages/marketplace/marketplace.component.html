@@ -158,16 +158,16 @@
 
     <div class="flex flex-wrap gap-4">
       @if(loading){
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
-      <div class="skeleton w-[18.5rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
+      <div class="skeleton w-[18rem] h-[22rem]"></div>
 
       } @else{ @if(filteredProducts.length == 0 ){
 
@@ -189,17 +189,17 @@
 
       <div class="card w-[18rem] bg-base-200 shadow-xl">
         <figure class="h-48">
-          <img src="{{ product.imageUrl }}" alt="Product Image" />
+          <img src="{{ product.product.imageUrl }}" alt="Product Image" />
         </figure>
         <div class="card-body p-4">
           <div class="flex flex-col justify-between h-full">
             <div>
               <a
-                [routerLink]="['/product', product.id]"
+                [routerLink]="['/product', product.product.id]"
                 class="hover:underline"
               >
                 <h2 class="card-title line-clamp-2 h-16">
-                  {{ product.name }}
+                  {{ product.product.name }}
                 </h2>
               </a>
 
@@ -211,15 +211,16 @@
                       type="radio"
                       name="rating-6"
                       class="mask mask-star-2 bg-orange-500"
-                      [checked]="something < 5"
+                      [checked]="something < product.averageRating"
                     /> </ng-container
                   >}
                 </div>
-                <span>(30)</span>
-                <span class="underline">20 Reviews</span>
+                <span class="underline"
+                  >({{ product.totalRatings }}) Reviews</span
+                >
               </div>
               <p class="line-clamp-1 text-gray">
-                {{ product.shortDescription }}
+                {{ product.product.shortDescription }}
               </p>
             </div>
           </div>
@@ -227,7 +228,7 @@
             <div
               class="text-xl flex items-end max-h-6 gap-1 font-bold flex-grow"
             >
-              {{ product.price }}
+              {{ product.product.price }}
               <p class="text-sm">Dt</p>
             </div>
             <button class="btn btn-sm btn-primary" (click)="addToCart(product)">

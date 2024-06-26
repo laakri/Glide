@@ -72,4 +72,26 @@ export class ProductService {
       })
     );
   }
+
+  editRating(
+    productId: number,
+    ratingId: number,
+    rating: any
+  ): Observable<any> {
+    const editUrl = `${this.apiUrl}/${productId}/rate/${ratingId}`;
+    return this.http.put<any>(editUrl, rating).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  deleteRating(productId: number, ratingId: number): Observable<any> {
+    const deleteUrl = `${this.apiUrl}/${productId}/rate/${ratingId}`;
+    return this.http.delete<any>(deleteUrl).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
 }

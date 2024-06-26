@@ -15,8 +15,8 @@ import { CategoryService } from '../../Services/category.service';
 })
 export class MarketplaceComponent implements OnInit {
   filter = true;
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products: any;
+  filteredProducts: any;
   categories: any[] = [];
   priceRanges: any[] = [
     { label: '$0 - $100', min: 0, max: 100 },
@@ -85,7 +85,6 @@ export class MarketplaceComponent implements OnInit {
   }
   filterSwitch() {
     this.filter = !this.filter;
-    console.log(this.filter);
   }
   loadCategories(): void {
     this.loading = true;

@@ -26,6 +26,7 @@ import { AboutComponent } from './Pages/about/about.component';
 import { ContactComponent } from './Pages/contact/contact.component';
 import { RoleGuard } from './Auth/AuthServices/role.guard';
 import { AdminPanelComponent } from './BackOfficePages/AdminSection/admin-panel/adminpanel.component';
+import { DashboardComponent } from './BackOfficePages/AdminSection/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -80,8 +81,13 @@ export const routes: Routes = [
     path: 'A',
     component: AdminPanelComponent,
     children: [
-      { path: '', redirectTo: 'add-product', pathMatch: 'full' },
-
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
+      },
       {
         path: 'add-product',
         loadComponent: () =>

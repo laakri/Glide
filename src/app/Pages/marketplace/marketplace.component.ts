@@ -141,6 +141,7 @@ export class MarketplaceComponent implements OnInit {
       next: (response: any) => {
         if (response && response.items.$values) {
           this.filteredProducts = response.items.$values;
+          console.log(this.filteredProducts);
           this.totalItems = response.totalItems;
           this.totalPages = response.totalPages;
         } else {
@@ -223,7 +224,7 @@ export class MarketplaceComponent implements OnInit {
     this.applyFiltersAndSearch();
   }
 
-  addToCart(product: Product): void {
-    this.cartService.addToCart(product);
+  addToCart(product: any): void {
+    this.cartService.addToCart(product.product);
   }
 }

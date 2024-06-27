@@ -14,18 +14,52 @@
         </tr>
       </thead>
       <tbody>
-        @for (report of reports; track report){
+        @for (report of reports; track report.id) {
         <tr>
           <td>{{ report.id }}</td>
           <td>{{ report.user.email }}</td>
           <td>{{ report.orderId }}</td>
           <td class="max-w-54">{{ report.description }}</td>
           <td>{{ report.status }}</td>
-          <td>{{ report.createdAt }}</td>
-          <td class="space-x-2">
-            <button class="btn btn-sm btn-info">Review</button>
-            <button class="btn btn-sm btn-success">Resolve</button>
-            <button class="btn btn-sm btn-ghost text-green">Resolved</button>
+          <td>{{ report.createdAt | date : "short" }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn btn-sm dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton{{ report.id }}"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Change Status
+              </button>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton{{ report.id }}"
+              >
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="updateStatus(report.id, ReportStatus.Pending)"
+                    >Pending</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="updateStatus(report.id, ReportStatus.Reviewed)"
+                    >Reviewed</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="updateStatus(report.id, ReportStatus.Resolved)"
+                    >Resolved</a
+                  >
+                </li>
+              </ul>
+            </div>
           </td>
         </tr>
         }

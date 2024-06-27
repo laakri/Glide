@@ -36,6 +36,7 @@ export class ProfilePageComponent implements OnInit {
           .getOrdersByUserId(this.user.userId)
           .subscribe((data: any) => {
             if (data && data.$values) {
+              console.log(this.orders);
               this.orders = data.$values;
             }
           });

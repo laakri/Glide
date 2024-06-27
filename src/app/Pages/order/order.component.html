@@ -46,10 +46,17 @@
             type="text"
             class="input input-bordered w-full"
             name="fullName"
-            ngModel
+            [(ngModel)]="fullName"
+            #fullNameField="ngModel"
             required
             placeholder="Enter your full name"
           />
+          <div
+            *ngIf="formSubmitted && fullNameField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            Full Name is required
+          </div>
         </div>
         <div>
           <label class="label">
@@ -59,10 +66,18 @@
             type="email"
             class="input input-bordered w-full"
             name="email"
-            ngModel
+            [(ngModel)]="email"
+            #emailField="ngModel"
             required
+            email
             placeholder="Enter your email"
           />
+          <div
+            *ngIf="formSubmitted && emailField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            Valid email is required
+          </div>
         </div>
         <div>
           <label class="label">
@@ -72,10 +87,17 @@
             type="tel"
             class="input input-bordered w-full"
             name="phone"
-            ngModel
+            [(ngModel)]="phone"
+            #phoneField="ngModel"
             required
             placeholder="Enter your phone number"
           />
+          <div
+            *ngIf="formSubmitted && phoneField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            Phone number is required
+          </div>
         </div>
         <div>
           <label class="label">
@@ -85,10 +107,17 @@
             type="text"
             class="input input-bordered w-full"
             name="address"
-            ngModel
+            [(ngModel)]="address"
+            #addressField="ngModel"
             required
             placeholder="Enter your shipping address"
           />
+          <div
+            *ngIf="formSubmitted && addressField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            Shipping Address is required
+          </div>
         </div>
         <div>
           <label class="label">
@@ -98,10 +127,17 @@
             type="text"
             class="input input-bordered w-full"
             name="city"
-            ngModel
+            [(ngModel)]="city"
+            #cityField="ngModel"
             required
             placeholder="Enter your city"
           />
+          <div
+            *ngIf="formSubmitted && cityField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            City is required
+          </div>
         </div>
         <div>
           <label class="label">
@@ -111,10 +147,17 @@
             type="text"
             class="input input-bordered w-full"
             name="postalCode"
-            ngModel
+            [(ngModel)]="postalCode"
+            #postalCodeField="ngModel"
             required
             placeholder="Enter your postal code"
           />
+          <div
+            *ngIf="formSubmitted && postalCodeField.invalid"
+            class="text-red-500 text-sm mt-1"
+          >
+            Postal Code is required
+          </div>
         </div>
       </div>
       <button class="btn btn-primary mt-4 w-full" type="submit">Apply</button>

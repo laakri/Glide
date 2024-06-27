@@ -17,12 +17,11 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const requiredRole = route.data['requiredRole'] as string;
-    if (this.authService.hasRole(requiredRole)) {
+    const requiredRoles = route.data['requiredRoles'] as string[];
+    if (this.authService.hasAnyRole(requiredRoles)) {
       return true;
     }
 
-    // Redirect to an unauthorized page or home page
     this.router.navigate(['/error-page']);
     return false;
   }

@@ -2,6 +2,7 @@
   class="bg-base-content flex justify-between items-center px-4 py-2 text-base-100"
 >
   <div class="text-sm text-gray">Free shipping & returns</div>
+
   <div class="font-bold">BLACK FRIDAY IS COMING</div>
   <div class="text-sm text-gray">Glide's Customer Service</div>
 </nav>
@@ -291,14 +292,14 @@
             Blog
           </button>
 
-          @if(isLoggedIn){
-          <button [routerLink]="['/dashboard']" class="btn btn-sm btn-ghost">
+          @if(isLoggedIn && hasAdminRole){
+          <button [routerLink]="['/A']" class="btn btn-sm btn-primary">
             Dashboard
           </button>
-          } @if(isLoggedIn){
+          } @if(isLoggedIn && hasDeliveryRole ){
           <button
             [routerLink]="['/list-order-delivery']"
-            class="btn btn-sm btn-ghost"
+            class="btn btn-sm btn-secondary"
           >
             Delivery
           </button>

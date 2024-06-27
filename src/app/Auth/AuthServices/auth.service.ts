@@ -147,4 +147,9 @@ export class AuthService {
     const userRole = this.getUserRole();
     return userRole === role;
   }
+
+  hasAnyRole(roles: string[]): boolean {
+    const userRole = this.getUserRole();
+    return userRole !== null && roles.includes(userRole);
+  }
 }

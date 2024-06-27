@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit {
   userData: any;
   unreadNotifications: number = 0;
   forest = false;
+  hasAdminRole = false;
+  hasDeliveryRole = false;
   theme = '';
   constructor(
     private cartService: CartService,
@@ -42,6 +44,11 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = loggedIn;
       if (loggedIn) {
         this.userData = this.authService.getUserData();
+        this.hasDeliveryRole = this.authService.hasAnyRole([
+          'Admin',
+          'Delivery',
+        ]);
+        this.hasAdminRole = this.authService.hasRole('Admin');
         this.fetchNotifications();
       }
     });

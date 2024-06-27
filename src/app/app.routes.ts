@@ -8,7 +8,6 @@ import { ProfilePageComponent } from './Profile/profile-page/profile-page.compon
 import { OrderDetailsComponent } from './Pages/order-details/order-details.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
-import { DashboardComponent } from './BackOfficePages/AdminSection/dashboard/dashboard.component';
 import { authGuard } from './Auth/AuthServices/auth.guard';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 import { QrScannerComponent } from './Components/qr-scanner/qr-scanner.component';
@@ -25,6 +24,8 @@ import { ReportListComponent } from './BackOfficePages/AdminSection/report-list/
 import { BlogComponent } from './Pages/blog/blog.component';
 import { AboutComponent } from './Pages/about/about.component';
 import { ContactComponent } from './Pages/contact/contact.component';
+import { RoleGuard } from './Auth/AuthServices/role.guard';
+import { AdminPanelComponent } from './BackOfficePages/AdminSection/admin-panel/adminpanel.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -72,11 +73,12 @@ export const routes: Routes = [
   {
     path: 'list-order-delivery',
     component: DeliveryOrdersComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, RoleGuard],
+    data: { requiredRoles: ['Admin', 'Delivery'] },
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'A',
+    component: AdminPanelComponent,
     children: [
       { path: '', redirectTo: 'add-product', pathMatch: 'full' },
 
@@ -86,7 +88,8 @@ export const routes: Routes = [
           import(
             './BackOfficePages/AdminSection/add-product/add-product.component'
           ).then((mod) => mod.AddProductComponent),
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
       {
         path: 'update-product/:productId',
@@ -94,28 +97,33 @@ export const routes: Routes = [
           import(
             './BackOfficePages/AdminSection/update-product/update-product.component'
           ).then((mod) => mod.UpdateProductComponent),
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
       {
         path: 'categories',
         component: CategoryCrudComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
 
       {
         path: 'list-product',
         component: ListProductComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
       {
         path: 'list-order',
         component: ListOrderComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
       {
         path: 'list-report',
         component: ReportListComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard, RoleGuard],
+        data: { requiredRoles: ['Admin'] },
       },
     ],
   },

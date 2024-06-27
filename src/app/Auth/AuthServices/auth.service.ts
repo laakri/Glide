@@ -134,4 +134,17 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
+  getUserRole(): string | null {
+    const token = this.tokenService.getToken();
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.role;
+    }
+    return null;
+  }
+
+  hasRole(role: string): boolean {
+    const userRole = this.getUserRole();
+    return userRole === role;
+  }
 }

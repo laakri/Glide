@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ReportRequest, ReportStatus } from '../Models/report.model';
+import { ReportStatus } from '../Models/report.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +11,19 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
-  createReport(reportRequest: any): Observable<Report> {
+  createReport(reportRequest: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}`, reportRequest);
   }
 
-  getReports(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}`);
+  getReports(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
-  getReportById(id: number): Observable<Report> {
-    return this.http.get<Report>(`${this.apiUrl}/${id}`);
+  getReportById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  updateReportStatus(id: number, status: ReportStatus): Observable<Report> {
-    return this.http.put<Report>(`${this.apiUrl}/${id}/status`, { status });
+  updateReportStatus(id: number, status: ReportStatus): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, { status });
   }
 }

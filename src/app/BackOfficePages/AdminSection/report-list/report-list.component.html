@@ -1,67 +1,59 @@
-<div class="container mx-auto p-4">
+<div class="container mx-auto p-4 h-full">
   <h1 class="text-2xl font-bold mb-4">Reports List</h1>
-  <div class="overflow-x-auto">
-    <table class="table w-full">
+  <div class="overflow-x-auto h-full">
+    <table class="table">
       <thead>
         <tr>
           <th class="text-left">ID</th>
           <th class="text-left">User</th>
           <th class="text-left">Order ID</th>
           <th class="text-left">Description</th>
-          <th class="text-left">Status</th>
           <th class="text-left">Created At</th>
           <th class="text-left">Action</th>
         </tr>
       </thead>
       <tbody>
-        @for (report of reports; track report.id) {
-        <tr>
+        @if(reports.length > 0){
+        <tr *ngFor="let report of reports">
           <td>{{ report.id }}</td>
-          <td>{{ report.user.email }}</td>
+          <td>{{ report.userEmail }}</td>
           <td>{{ report.orderId }}</td>
           <td class="max-w-54">{{ report.description }}</td>
-          <td>{{ report.status }}</td>
+
           <td>{{ report.createdAt | date : "short" }}</td>
+
           <td>
-            <div class="dropdown">
-              <button
-                class="btn btn-sm dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton{{ report.id }}"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <button
+              class="btn btn-sm mr-2"
+              [routerLink]="['/orderDetails', report.orderId]"
+            >
+              View Order
+            </button>
+            <details class="dropdown dropdown-bottom dropdown-end">
+              <summary
+                class="btn btn-sm"
+                [ngClass]="getStatusClass(report.status).color"
               >
-                Change Status
-              </button>
+                {{ getStatusClass(report.status).text }}
+              </summary>
               <ul
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton{{ report.id }}"
+                class="menu dropdown-content rounded-box z-[1] w-52 p-2 shadow bg-base-300"
               >
                 <li>
-                  <a
-                    class="dropdown-item"
-                    (click)="updateStatus(report.id, ReportStatus.Pending)"
-                    >Pending</a
-                  >
+                  <a (click)="updateStatus(report, 0)">Pending</a>
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item"
-                    (click)="updateStatus(report.id, ReportStatus.Reviewed)"
-                    >Reviewed</a
-                  >
+                  <a (click)="updateStatus(report, 1)">Reviewed</a>
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item"
-                    (click)="updateStatus(report.id, ReportStatus.Resolved)"
-                    >Resolved</a
-                  >
+                  <a (click)="updateStatus(report, 2)">Resolved</a>
                 </li>
               </ul>
-            </div>
+            </details>
           </td>
         </tr>
+        }@else{
+        <div>No reports yet</div>
         }
       </tbody>
     </table>

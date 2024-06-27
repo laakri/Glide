@@ -1,19 +1,24 @@
+import { ToastService } from './../../../Services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../Services/report.service';
 import { ReportStatus } from '../../../Models/report.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-report-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './report-list.component.html',
 })
 export class ReportListComponent implements OnInit {
   reports: any[] = [];
-  ReportStatus = ReportStatus; // Make enum available in template
+  ReportStatus = ReportStatus;
 
-  constructor(private reportService: ReportService) {}
+  constructor(
+    private reportService: ReportService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadReports();
@@ -33,18 +38,48 @@ export class ReportListComponent implements OnInit {
     );
   }
 
-  updateStatus(reportId: number, newStatus: ReportStatus): void {
-    this.reportService.updateReportStatus(reportId, newStatus).subscribe(
+  updateStatus(report: any, newStatus: any): void {
+    this.reportService.updateReportStatus(report.id, newStatus).subscribe(
       () => {
-        // Update the local report status
-        const report = this.reports.find((r) => r.id === reportId);
-        if (report) {
-          report.status = newStatus;
-        }
+        report.status = newStatus;
+        this.toastService.showToast(' Report updated', 'success');
       },
       (error) => {
+        this.toastService.showToast(' Error updating report status', 'error');
+
         console.error('Error updating report status', error);
       }
     );
+  }
+
+  canChangeStatus(
+    currentStatus: ReportStatus,
+    newStatus: ReportStatus
+  ): boolean {
+    const statusOrder = [
+      ReportStatus.Pending,
+      ReportStatus.Reviewed,
+      ReportStatus.Resolved,
+    ];
+    return (
+      statusOrder.indexOf(newStatus) === statusOrder.indexOf(currentStatus) + 1
+    );
+  }
+
+  getStatusClass(status: any): {
+    text: string;
+    color: string;
+  } {
+    switch (status) {
+      case 0:
+        return { text: 'Pending ', color: 'btn-warning' };
+      case 1:
+        return { text: 'Reviewed', color: 'btn-info' };
+      case 2:
+        return { text: 'Resolved', color: 'btn-success' };
+
+      default:
+        return { text: 'Unknown', color: '' };
+    }
   }
 }

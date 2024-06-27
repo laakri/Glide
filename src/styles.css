@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.menu li.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .dropdown-content::-webkit-scrollbar {
     width: 8px; /* Width of the scrollbar */
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Product } from '../../Models/product.model';
 import { OrderService } from '../../Services/order.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './order.component.html',
 })
 export class OrderComponent implements OnInit {
@@ -19,13 +19,13 @@ export class OrderComponent implements OnInit {
   cartTotal: number = 0;
   isBrowser: boolean;
   formSubmitted = false;
-  // Add these properties
   fullName: string = '';
   email: string = '';
   phone: string = '';
   address: string = '';
   city: string = '';
   postalCode: string = '';
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private orderService: OrderService,
@@ -62,51 +62,49 @@ export class OrderComponent implements OnInit {
 
   submitOrder(orderForm: NgForm) {
     this.formSubmitted = true;
+    console.log('Form submitted', orderForm.value);
 
     if (orderForm.invalid) {
-      this.toastService.showToast(
-        'Please fill in all required fields.',
-        'error'
-      );
+      console.log('Form is invalid', orderForm.errors);
+      this.toastService.showToast('Please fill in all required fields.', 'error');
       return;
     }
 
-    const orderRequest: any = {
+    const orderRequest = {
       total: this.cartTotal,
-      fullName: orderForm.value.fullName,
-      email: orderForm.value.email,
-      phone: orderForm.value.phone,
-      address: orderForm.value.address,
-      city: orderForm.value.city,
-      postalCode: orderForm.value.postalCode,
-      items: this.cartItems.map((item) => ({
-        product: item.product,
-        quantity: item.quantity,
-      })),
+      fullName: this.fullName,
+      email: this.email,
+      phone: this.phone,
+      address: this.address,
+      city: this.city,
+      postalCode: this.postalCode,
+      items: this.cartItems.map(item => ({
+        product: {
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.price
+        },
+        quantity: item.quantity
+      }))
     };
 
-    this.orderService.submitOrder(orderRequest).subscribe(
-      (response) => {
+    console.log('Sending order request:', orderRequest);
+
+    this.orderService.submitOrder(orderRequest).subscribe({
+      next: (response) => {
+        console.log('Order success:', response);
         this.toastService.showToast('Order created successfully.', 'success');
         this.cartService.clearCart();
         this.router.navigate(['/marketplace']);
       },
-      (error) => {
-        console.error(error);
-        if (error.error && error.error.errors) {
-          const errorMessages = Object.values(error.error.errors).flat();
-          console.log(errorMessages.join(', '));
-          this.toastService.showToast(
-            'Error creating Order. Please try again.',
-            'error'
-          );
+      error: (error) => {
+        console.error('Order error:', error);
+        if (error.error?.message) {
+          this.toastService.showToast(`Error: ${error.error.message}`, 'error');
         } else {
-          this.toastService.showToast(
-            'Error creating Order. Please try again.',
-            'error'
-          );
+          this.toastService.showToast('Error creating order. Please try again.', 'error');
         }
       }
-    );
+    });
   }
 }

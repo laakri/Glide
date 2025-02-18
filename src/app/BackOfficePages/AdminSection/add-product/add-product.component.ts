@@ -35,34 +35,54 @@ export class AddProductComponent implements OnInit {
   submitAddProduct(addProductForm: NgForm) {
     const formData = new FormData();
 
-    for (const [key, value] of Object.entries(addProductForm.value)) {
-      formData.append(key, value as string);
-      console.log(formData);
-    }
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-    }
-    const colors = addProductForm.value.colors
-      .split(' ')
-      .map((color: string) => color.trim());
-    const sizes = addProductForm.value.sizes
-      .split(' ')
-      .map((size: string) => size.trim());
-    console.log(sizes);
-    const colorsjson = JSON.stringify(addProductForm.value.colors);
-    const sizesjson = JSON.stringify(addProductForm.value.sizes);
-    console.log(sizesjson);
+    // Log the raw form values first
+    console.log("Raw Form Values:", addProductForm.value);
 
-    formData.append('colors', colorsjson);
-    formData.append('sizes', sizesjson);
-    this.productService.addProduct(formData).subscribe(
-      (response) => {
-        this.toastService.showToast('Product added successfully .', 'success');
-        // addProductForm.reset();
-      },
-      (error) => {
-        this.toastService.showToast('Error adding product .', 'error');
-      }
-    );
+    // Process colors and sizes before adding to FormData
+    const colors = addProductForm.value.colors
+        ? addProductForm.value.colors.split(' ').map((color: string) => color.trim())
+        : [];
+    const sizes = addProductForm.value.sizes
+        ? addProductForm.value.sizes.split(' ').map((size: string) => size.trim())
+        : [];
+
+    console.log("Processed Colors:", colors);
+    console.log("Processed Sizes:", sizes);
+
+    // Add basic form fields to FormData
+    for (const [key, value] of Object.entries(addProductForm.value)) {
+        if (key !== 'colors' && key !== 'sizes') {
+            formData.append(key, value as string);
+            console.log(`Form field - ${key}:`, value);
+        }
+    }
+
+    // Add file if selected
+    if (this.selectedFile) {
+        formData.append('image', this.selectedFile, this.selectedFile.name);
+        console.log("Selected File:", this.selectedFile.name);
+    }
+
+    // Add processed arrays as JSON strings
+    formData.append('colors', JSON.stringify(colors));
+    formData.append('sizes', JSON.stringify(sizes));
+
+    // Log all form data values using forEach
+    console.log("Final FormData values:");
+    formData.forEach((value, key) => {
+        console.log(key, value);
+    });
+
+    // Now send the request
+    this.productService.addProduct(formData).subscribe({
+        next: (response) => {
+            console.log("Success Response:", response);
+            this.toastService.showToast('Product added successfully.', 'success');
+        },
+        error: (error) => {
+            console.log("Error Response:", error);
+            this.toastService.showToast('Error adding product.', 'error');
+        }
+    });
   }
 }
